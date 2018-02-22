@@ -24,11 +24,13 @@ class ArticleList extends Component {
             </li>
         )
         return (
-            <ul>
+            <ul ref = {this.setContainerRef}>
                 {articleElements}
             </ul>
         )
     }
+
+    setContainerRef = containerRef => console.log(containerRef)
 }
 
 export default accordion(ArticleList)
