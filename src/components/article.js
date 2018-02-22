@@ -1,16 +1,20 @@
-import React from 'react'
+import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
 
-function Article({ isOpen, article, onButtonClick }) {
-    return (
-        <div>
-            <h2>
-                {article.title}
-                <button onClick = {onButtonClick}>{isOpen ? 'close' : 'open'}</button>
-            </h2>
-            {isOpen && getBody(article)}
-        </div>
-    )
+class Article extends PureComponent {
+    render() {
+        const { isOpen, article, onButtonClick } = this.props
+        console.log('---', 1)
+        return (
+            <div>
+                <h2>
+                    {article.title}
+                    <button onClick={() => onButtonClick(article.id)}>{isOpen ? 'close' : 'open'}</button>
+                </h2>
+                {isOpen && getBody(article)}
+            </div>
+        )
+    }
 }
 
 function getBody(article) {
