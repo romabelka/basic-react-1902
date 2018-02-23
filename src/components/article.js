@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import CommentsList from "./comments-list";
 
 class Article extends PureComponent {
     render() {
@@ -21,7 +22,9 @@ function getBody(article) {
     return (
         <section>
             {article.text}
+            <CommentsList comments={article.comments}/>
         </section>
+
     )
 }
 
