@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import CommentList from './CommentList'
 
 class Article extends PureComponent {
     render() {
@@ -12,6 +13,7 @@ class Article extends PureComponent {
                     <button onClick={() => onButtonClick(article.id)}>{isOpen ? 'close' : 'open'}</button>
                 </h2>
                 {isOpen && getBody(article)}
+                <CommentList comments={article.comments} />
             </div>
         )
     }
@@ -30,7 +32,8 @@ Article.propTypes = {
     isOpen: PropTypes.bool,
     article: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        text: PropTypes.string
+        text: PropTypes.string,
+        comments: PropTypes.array,
     }).isRequired,
     onButtonClick: PropTypes.func
 }
