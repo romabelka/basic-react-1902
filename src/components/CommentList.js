@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import showComments from '../decorators/showComments'
+import accordion from '../decorators/accordion'
 
 class CommentList extends Component {
   renderComments = comment => (
@@ -34,4 +34,4 @@ CommentList.defaultProps = {
   comments: []
 }
 
-export default showComments(CommentList)
+export default accordion(CommentList)

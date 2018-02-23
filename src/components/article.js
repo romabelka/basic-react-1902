@@ -13,7 +13,7 @@ class Article extends PureComponent {
                     <button onClick={() => onButtonClick(article.id)}>{isOpen ? 'close' : 'open'}</button>
                 </h2>
                 {isOpen && getBody(article)}
-                <CommentList comments={article.comments} />
+                {isOpen && <CommentList comments={article.comments} />}
             </div>
         )
     }
