@@ -26,8 +26,8 @@ class CommentList extends Component {
 
 CommentList.propTypes = {
   comments: PropTypes.array,
-  show: PropTypes.bool,
-  showItem: PropTypes.func
+  show: PropTypes.bool.isRequired,
+  showItem: PropTypes.func.isRequired
 }
 
 CommentList.defaultProps = {
