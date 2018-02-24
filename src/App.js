@@ -5,14 +5,31 @@ import Chart from './components/chart'
 import UserForm from './components/user-form'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+import DayPicker, { DateUtils } from 'react-day-picker'
+import 'react-day-picker/lib/style.css'
 
 class App extends Component {
     static propTypes = {
 
     };
 
+    static defaultProps = {
+        numberOfMonths: 2
+    };
+
     state = {
-        selected: null
+        selected: null,
+        from: null,
+        to: null
+    }
+
+    handleDayClick = (day) => {
+        const range = DateUtils.addDayToRange(day, this.state);
+        this.setState(range);
+    }
+
+    handleResetClick = () => {
+        this.setState({ from: null, to: null});
     }
 
     render() {
@@ -21,8 +38,36 @@ class App extends Component {
             label: article.title,
             value: article.id
         }))
+
+        const { from, to } = this.state;
+        const modifiers = { start: from, end: to }
+
+        const dayPickerStatus = () =>
+            <p>
+                {!from && !to && 'Please select the first day.'}
+                {from && !to && 'Please select the last day.'}
+                {from &&
+                to &&
+                `Selected from ${from.toLocaleDateString()} to 
+                ${to.toLocaleDateString()}`}{' '}
+                {from &&
+                to && (
+                    <button className="link" onClick={this.handleResetClick}>
+                            Reset
+                    </button>
+                )}
+            </p>
+
         return (
             <div>
+                {dayPickerStatus()}
+                <DayPicker
+                    className="Selectable"
+                    numberOfMonths={this.props.numberOfMonths}
+                    selectedDays={[from, { from, to }]}
+                    modifiers={modifiers}
+                    onDayClick={this.handleDayClick}
+                />
                 <UserForm />
                 <Select options = {options} value = {this.state.selected} onChange = {this.handleSelect} multi/>
                 <ArticleList articles = {articles} ref = {this.setListRef}/>
