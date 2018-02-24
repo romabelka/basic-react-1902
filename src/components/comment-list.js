@@ -34,7 +34,7 @@ class CommentList extends Component {
 
                 {isOpenComments() &&
                     <ul>
-                            {commentElements}
+                        {commentElements}
                     </ul>
                 }
             </div>

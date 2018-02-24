@@ -9,9 +9,9 @@ export default (OriginalComponent) => class DecoratedComponent extends React.Com
         if (this.state.openItemId === openItemId) {
             this.setState({ openItemId: null })
         } else {
-						this.setState({ openItemId })
+            this.setState({ openItemId })
         }
-		}
+    }
 
 
     render() {

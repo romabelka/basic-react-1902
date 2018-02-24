@@ -22,7 +22,7 @@ function getBody(article) {
     return (
         <section>
             {article.text}
-						<CommentList comments={ article.comments } />
+            <CommentList comments={ article.comments } />
         </section>
     )
 }
