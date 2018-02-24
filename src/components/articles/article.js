@@ -1,10 +1,10 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import Comments from '../comments/comments-list'
 
 class Article extends PureComponent {
     render() {
         const { isOpen, article, onButtonClick } = this.props
-        console.log('---', 1)
         return (
             <div>
                 <h2>
@@ -21,10 +21,10 @@ function getBody(article) {
     return (
         <section>
             {article.text}
+            <Comments comments = { article.comments }/>
         </section>
     )
 }
-
 
 Article.propTypes = {
     isOpen: PropTypes.bool,
