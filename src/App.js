@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {findDOMNode} from 'react-dom'
 import ArticleList from './components/article-list'
+import DateFilter from './components/date-filter'
 import Chart from './components/chart'
 import UserForm from './components/user-form'
 import Select from 'react-select'
@@ -25,6 +26,7 @@ class App extends Component {
             <div>
                 <UserForm />
                 <Select options = {options} value = {this.state.selected} onChange = {this.handleSelect} multi/>
+                <DateFilter/>
                 <ArticleList articles = {articles} ref = {this.setListRef}/>
                 <Chart articles = {articles}/>
             </div>
