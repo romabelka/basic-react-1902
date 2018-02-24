@@ -13,24 +13,24 @@ class App extends Component {
 
     };
 
-		static defaultProps = {
-				numberOfMonths: 2
-		};
+    static defaultProps = {
+        numberOfMonths: 2
+    };
 
     state = {
         selected: null,
-				from: null,
-				to: null
+        from: null,
+        to: null
     }
 
-		handleDayClick = (day) => {
-				const range = DateUtils.addDayToRange(day, this.state);
-				this.setState(range);
-		}
+    handleDayClick = (day) => {
+        const range = DateUtils.addDayToRange(day, this.state);
+        this.setState(range);
+    }
 
-		handleResetClick = () => {
-				this.setState({ from: null, to: null});
-		}
+    handleResetClick = () => {
+        this.setState({ from: null, to: null});
+    }
 
     render() {
         const {articles} = this.props
@@ -39,35 +39,35 @@ class App extends Component {
             value: article.id
         }))
 
-				const { from, to } = this.state;
-				const modifiers = { start: from, end: to }
+        const { from, to } = this.state;
+        const modifiers = { start: from, end: to }
 
-				const dayPickerStatus = () =>
-						<p>
-								{!from && !to && 'Please select the first day.'}
-								{from && !to && 'Please select the last day.'}
-								{from &&
-								to &&
-								`Selected from ${from.toLocaleDateString()} to
+        const dayPickerStatus = () =>
+            <p>
+                {!from && !to && 'Please select the first day.'}
+                {from && !to && 'Please select the last day.'}
+                {from &&
+                to &&
+                `Selected from ${from.toLocaleDateString()} to 
                 ${to.toLocaleDateString()}`}{' '}
-								{from &&
-								to && (
-									<button className="link" onClick={this.handleResetClick}>
-											Reset
-									</button>
-								)}
-						</p>
+                {from &&
+                to && (
+                    <button className="link" onClick={this.handleResetClick}>
+                            Reset
+                    </button>
+                )}
+            </p>
 
         return (
             <div>
-								{dayPickerStatus()}
-								<DayPicker
-									className="Selectable"
-									numberOfMonths={this.props.numberOfMonths}
-									selectedDays={[from, { from, to }]}
-									modifiers={modifiers}
-									onDayClick={this.handleDayClick}
-								/>
+                {dayPickerStatus()}
+                <DayPicker
+                    className="Selectable"
+                    numberOfMonths={this.props.numberOfMonths}
+                    selectedDays={[from, { from, to }]}
+                    modifiers={modifiers}
+                    onDayClick={this.handleDayClick}
+                />
                 <UserForm />
                 <Select options = {options} value = {this.state.selected} onChange = {this.handleSelect} multi/>
                 <ArticleList articles = {articles} ref = {this.setListRef}/>
