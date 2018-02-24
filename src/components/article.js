@@ -1,29 +1,38 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import CommentsList from './CommentsList'
+import accordion from '../decorators/accordion'
 
 class Article extends PureComponent {
     render() {
         const { isOpen, article, onButtonClick } = this.props
-        console.log('---', 1)
         return (
             <div>
                 <h2>
                     {article.title}
-                    <button onClick={() => onButtonClick(article.id)}>{isOpen ? 'close' : 'open'}</button>
+                    <button onClick={ () => (isOpen ? onButtonClick(null) : onButtonClick(article.id)) }  > {isOpen ? 'Закрыть' : 'Открыть'}</button>
                 </h2>
-                {isOpen && getBody(article)}
+                {isOpen && this.getBody()}
             </div>
+        )
+    }
+    getBody() {
+        const {article, toggleItem, openItemId} = this.props
+        console.log(this.props)
+        return (
+            <section>
+                {article.text}
+                <CommentsList 
+                    comments = {article.comments}
+                    listId = {article.id}
+                    onButtonClick = {toggleItem}
+                    isOpen = {openItemId === article.id}
+                />
+            </section>
         )
     }
 }
 
-function getBody(article) {
-    return (
-        <section>
-            {article.text}
-        </section>
-    )
-}
 
 
 Article.propTypes = {
@@ -35,4 +44,4 @@ Article.propTypes = {
     onButtonClick: PropTypes.func
 }
 
-export default Article
+export default accordion(Article)
