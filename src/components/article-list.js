@@ -6,7 +6,6 @@ import accordion from '../decorators/accordion'
 class ArticleList extends Component {
     static propTypes = {
         articles: PropTypes.array.isRequired,
-
         //from accordion decorator
         openItemId: PropTypes.string,
         toggleItem: PropTypes.func
