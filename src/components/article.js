@@ -1,10 +1,11 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
 
+import CommentList from './CommentList'
+
 class Article extends PureComponent {
     render() {
         const { isOpen, article, onButtonClick } = this.props
-        console.log('---', 1)
         return (
             <div>
                 <h2>
@@ -21,6 +22,7 @@ function getBody(article) {
     return (
         <section>
             {article.text}
+            {article.comments && <CommentList items={article.comments} />}
         </section>
     )
 }
