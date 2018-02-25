@@ -5,10 +5,12 @@ import Chart from './components/chart'
 import UserForm from './components/user-form'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+import DayPicker from './components/dayPicker'
+import PropTypes from 'prop-types'
 
 class App extends Component {
     static propTypes = {
-
+      articles: PropTypes.array.isRequired
     };
 
     state = {
@@ -24,6 +26,7 @@ class App extends Component {
         return (
             <div>
                 <UserForm />
+                <DayPicker />
                 <Select options = {options} value = {this.state.selected} onChange = {this.handleSelect} multi/>
                 <ArticleList articles = {articles} ref = {this.setListRef}/>
                 <Chart articles = {articles}/>
