@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import CommentList from './comment-list'
 
 class Article extends PureComponent {
     render() {
@@ -21,6 +22,8 @@ function getBody(article) {
     return (
         <section>
             {article.text}
+
+            <CommentList comments = {article.comments} />
         </section>
     )
 }
@@ -30,7 +33,7 @@ Article.propTypes = {
     isOpen: PropTypes.bool,
     article: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        text: PropTypes.string
+        text: PropTypes.string.isRequired
     }).isRequired,
     onButtonClick: PropTypes.func
 }
