@@ -33,7 +33,7 @@ Article.propTypes = {
     isOpen: PropTypes.bool,
     article: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        text: PropTypes.string
+        text: PropTypes.string.isRequired
     }).isRequired,
     onButtonClick: PropTypes.func
 }

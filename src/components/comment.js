@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 class Comment extends PureComponent {
     render() {
         const { comment } = this.props
-        console.log('---', 1)
         return (
             <div>
                 <h2>
@@ -25,14 +24,11 @@ function getBody(comment) {
     )
 }
 
-
 Comment.propTypes = {
-    isOpen: PropTypes.bool,
     comment: PropTypes.shape({
         user: PropTypes.string,
         text: PropTypes.string
-    }).isRequired,
-    onButtonClick: PropTypes.func
+    }).isRequired
 }
 
 export default Comment
