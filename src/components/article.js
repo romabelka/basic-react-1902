@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import Comment from 'components/comment'
 
 class Article extends PureComponent {
     render() {
@@ -20,7 +21,11 @@ class Article extends PureComponent {
 function getBody(article) {
     return (
         <section>
-            {article.text}
+          {article.text}
+          <p> <b><i>Comments: </i></b></p>
+          { article.comments.map(el => (
+              <Comment key={el.id} dataComment={el} />
+          )) }
         </section>
     )
 }
