@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import {findDOMNode} from 'react-dom'
 import ArticleList from './components/article-list'
 import Chart from './components/chart'
-import 'react-select/dist/react-select.css'
-
+import DateRangePicker from './components/DateRangePicker'
 class App extends Component {
     static propTypes = {
 
@@ -17,6 +16,7 @@ class App extends Component {
         const {articles} = this.props
         return (
             <div>
+                <DateRangePicker />
                 <ArticleList articles = {articles} ref = {this.setListRef}/>
                 <Chart articles = {articles}/>
             </div>
