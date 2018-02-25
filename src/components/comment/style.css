@@ -1,0 +1,7 @@
+.comment-link {
+    cursor: pointer;
+    font-weight: 600;
+    color: #2727fd;
+    text-decoration: underline;
+    padding: 10px;
+}
