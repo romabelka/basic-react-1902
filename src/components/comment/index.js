@@ -12,8 +12,6 @@ class Comment extends Component {
       isOpen,
     } = this.props
 
-    console.log('render', isOpen)
-
     return (
       <div>
         <div className="comment-link" onClick={toggleItem}>{dataComment.user}</div>
