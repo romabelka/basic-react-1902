@@ -6,8 +6,6 @@ class Chart extends Component {
     };
 
     componentDidMount() {
-        //perform charting with d3
-        console.log('---', this.refs.container)
     }
 
     componentWillReceiveProps() {
