@@ -8,7 +8,7 @@ class Comment extends PureComponent {
         return (
             <div>
                 <h2>
-                    {comment.title}
+                    {comment.user}
 
                 </h2>
                 {getBody(comment)}
@@ -29,7 +29,7 @@ function getBody(comment) {
 Comment.propTypes = {
     isOpen: PropTypes.bool,
     comment: PropTypes.shape({
-        title: PropTypes.string.isRequired,
+        user: PropTypes.string,
         text: PropTypes.string
     }).isRequired,
     onButtonClick: PropTypes.func

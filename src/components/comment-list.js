@@ -5,7 +5,7 @@ import commentsdecorator from '../decorators/commentsdecorator'
 
 class CommentList extends Component {
     static propTypes = {
-        comments: PropTypes.array.isRequired,
+        comments: PropTypes.array,
 
         //from commentsdecorator decorator
         openItemId: PropTypes.string,
