@@ -3,7 +3,18 @@ import PropTypes from 'prop-types'
 import CommentList from './comment-list'
 
 class Article extends PureComponent {
+    state = {
+        error: null
+    }
+
+    componentDidCatch(error) {
+        console.log('---', error)
+        this.setState({ error })
+    }
+
     render() {
+        if (this.state.error) return <h2>{this.state.error.message}</h2>
+
         const { isOpen, article, onButtonClick } = this.props
         return (
             <div>

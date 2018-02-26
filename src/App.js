@@ -12,10 +12,6 @@ class App extends Component {
         articles: PropTypes.array.isRequired
     };
 
-    state = {
-        selected: null
-    }
-
     render() {
         const {articles} = this.props
         return (
