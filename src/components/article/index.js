@@ -35,7 +35,7 @@ class Article extends PureComponent {
                     transitionEnterTimeout = {500}
                     transitionLeaveTimeout = {300}
                     transitionAppearTimeout = {1000}
-                    component = "div"
+                    component = {Fragment}
                 >
                     {isOpen && getBody(article)}
                 </CSSTransition>
