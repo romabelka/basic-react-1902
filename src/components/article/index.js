@@ -1,6 +1,8 @@
-import React, {PureComponent} from 'react'
+import React, {PureComponent, Fragment} from 'react'
 import PropTypes from 'prop-types'
-import CommentList from './comment-list'
+import CSSTransition from 'react-addons-css-transition-group'
+import CommentList from '../comment-list'
+import './style.css'
 
 class Article extends PureComponent {
     state = {
@@ -17,7 +19,7 @@ class Article extends PureComponent {
 
         const { isOpen, article, onButtonClick } = this.props
         return (
-            <div>
+            <Fragment>
                 <h2>
                     {article.title}
                     <button
@@ -27,8 +29,17 @@ class Article extends PureComponent {
                         {isOpen ? 'close' : 'open'}
                     </button>
                 </h2>
-                {isOpen && getBody(article)}
-            </div>
+                <CSSTransition
+                    transitionName = "article"
+                    transitionAppear
+                    transitionEnterTimeout = {500}
+                    transitionLeaveTimeout = {300}
+                    transitionAppearTimeout = {1000}
+                    component = "div"
+                >
+                    {isOpen && getBody(article)}
+                </CSSTransition>
+            </Fragment>
         )
     }
 }

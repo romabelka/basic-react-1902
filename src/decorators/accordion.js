@@ -2,7 +2,7 @@ import React from 'react'
 
 export default (OriginalComponent) => class DecoratedComponent extends React.Component {
     state = {
-        openItemId: null
+        openItemId: this.props.defaultOpenId
     }
 
     toggleItem = openItemId => this.setState({ openItemId })
