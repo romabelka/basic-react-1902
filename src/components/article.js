@@ -20,7 +20,12 @@ class Article extends PureComponent {
             <div>
                 <h2>
                     {article.title}
-                    <button onClick={() => onButtonClick(article.id)}>{isOpen ? 'close' : 'open'}</button>
+                    <button
+                        className = "test__article--button"
+                        onClick={() => onButtonClick(article.id)}
+                    >
+                        {isOpen ? 'close' : 'open'}
+                    </button>
                 </h2>
                 {isOpen && getBody(article)}
             </div>
@@ -30,7 +35,7 @@ class Article extends PureComponent {
 
 function getBody(article) {
     return (
-        <section>
+        <section className = "test__article--body">
             {article.text}
             <CommentList comments={article.comments}/>
         </section>
