@@ -12,6 +12,10 @@ class ArticleList extends Component {
         toggleItem: PropTypes.func
     };
 
+    componentDidMount() {
+        this.props.fetchData && this.props.fetchData()
+    }
+
     render() {
         const { articles, openItemId, toggleItem } = this.props
         const articleElements = articles.map(article =>
