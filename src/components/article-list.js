@@ -9,17 +9,21 @@ class ArticleList extends Component {
 
         //from accordion decorator
         openItemId: PropTypes.string,
-        toggleItem: PropTypes.func
+        openSubItemsId: PropTypes.string,
+        toggleItem: PropTypes.func,
+        toggleSubItems: PropTypes.func
     };
 
     render() {
-        const { articles, openItemId, toggleItem } = this.props
+        const { articles, openItemId, toggleItem, openSubItemsId, toggleSubItems } = this.props
         const articleElements = articles.map(article =>
             <li key = {article.id}>
                 <Article
                     article = {article}
                     onButtonClick = {toggleItem}
+                    onCommentsButtonClick = {toggleSubItems}
                     isOpen = {openItemId === article.id}
+                    areCommentsOpen= {openSubItemsId === article.id}
                 />
             </li>
         )
@@ -29,7 +33,6 @@ class ArticleList extends Component {
             </ul>
         )
     }
-
     setContainerRef = containerRef => console.log(containerRef)
 }
 

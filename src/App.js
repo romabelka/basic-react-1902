@@ -5,6 +5,8 @@ import Chart from './components/chart'
 import UserForm from './components/user-form'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
+import Calendar from './components/calendar'
+
 
 class App extends Component {
     static propTypes = {
@@ -25,6 +27,7 @@ class App extends Component {
             <div>
                 <UserForm />
                 <Select options = {options} value = {this.state.selected} onChange = {this.handleSelect} multi/>
+                <Calendar/>
                 <ArticleList articles = {articles} ref = {this.setListRef}/>
                 <Chart articles = {articles}/>
             </div>
