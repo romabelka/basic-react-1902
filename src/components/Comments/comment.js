@@ -5,11 +5,9 @@ class Comment extends PureComponent {
 
   /**
    *
-   * @type {{isOpen: shim, onButtonClick: shim, comment}}
+   * @type {{comment}}
    */
   static propTypes = {
-    isOpen: PropTypes.bool,
-    onButtonClick: PropTypes.func,
     comment: PropTypes.shape({
       text: PropTypes.string.isRequired,
       user: PropTypes.string.isRequired
@@ -27,31 +25,17 @@ class Comment extends PureComponent {
    * @returns {*}
    */
   render() {
-    let {comment, isOpen, onButtonClick} = this.props;
-    console.log('---', 2);
+    let {comment} = this.props;
+    console.log('---', 3);
 
     return (
       <div>
         [<b>{comment.user}</b>][<i>#{comment.id}</i>]
-        <button onClick={() => onButtonClick(comment.id)}>
-          {isOpen ? 'Close comment' : 'Open comment'}
-        </button>
-        {isOpen && getCommentBody(comment)}
+        <p>{comment.text}</p>
       </div>
     );
   }
 
-}
-
-/**
- *
- * @param comment
- * @returns {*}
- */
-function getCommentBody(comment) {
-  return (
-    <p>{comment.text}</p>
-  )
 }
 
 export default Comment;

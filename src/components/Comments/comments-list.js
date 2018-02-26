@@ -1,9 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import accordion from "../../decorators/accordion-decorator";
+import ToggleContentDecorator from "../../decorators/toggle-content-decorator";
 import Comment from "./comment";
 
 class CommentsList extends Component {
+
+  componentDidMount() {
+    console.log('Test');
+  }
 
   /**
    *
@@ -30,25 +34,41 @@ class CommentsList extends Component {
    * @returns {*}
    */
   render() {
-    let {comments, openItemId, toggleItem} = this.props;
+    let {comments, isOpenItem, toggleItem} = this.props;
+    console.log(isOpenItem);
+    console.log('---', 2);
+
+    if (!comments.length) {
+      return null;
+    }
 
     let commentsList = comments.map((comment) => {
       return (
         <li key={comment.id}>
-          <Comment comment={comment} isOpen={openItemId === comment.id} onButtonClick={toggleItem}/>
+          <Comment comment={comment}/>
           <hr />
         </li>
       );
     });
 
     return (
-      <ul className="comments-list">
-        {comments.length > 0 && <h4 style={{textDecoration: "underline"}}><i>Comments:</i></h4>}
-        {commentsList}
-      </ul>
+      <div>
+        <h4 style={{textDecoration: "underline"}}>
+          <i>Comments:</i>
+          <button onClick={toggleItem}>
+            {isOpenItem ? 'Close comments list' : 'Open comments list'}
+          </button>
+        </h4>
+        {isOpenItem &&
+          <ul className="comments-list">
+            {commentsList}
+          </ul>}
+      </div>
+
+
     );
   }
 
 }
 
-export default accordion(CommentsList);
+export default ToggleContentDecorator(CommentsList);

@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types';
 import ArticleList from './components/Article/article-list'
 import './style.css';
-import Calendar from "./components/calendar";
+import Calendar from "./components/Calendar";
 
 class App extends Component {
 

@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import DayPicker, { DateUtils } from 'react-day-picker';
-import Helmet from 'react-helmet';
+//import Helmet from 'react-helmet';
 import 'react-day-picker/lib/style.css';
+import './style.css';
 
 class Calendar extends Component {
 
@@ -78,7 +79,7 @@ class Calendar extends Component {
           onDayClick={this.handleDayClick}
         />
 
-        {addCalendarRangeStylesToHead()}
+        {/*{addCalendarRangeStylesToHead()}*/}
 
         <hr /><hr />
 
@@ -92,7 +93,7 @@ class Calendar extends Component {
  *
  * @returns {*}
  */
-function addCalendarRangeStylesToHead() {
+/*function addCalendarRangeStylesToHead() {
   return <Helmet>
       <style>{`
     .Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
@@ -112,6 +113,6 @@ function addCalendarRangeStylesToHead() {
     }
   `}</style>
   </Helmet>
-}
+}*/
 
 export default Calendar;
