@@ -20,7 +20,7 @@ class CommentList extends Component {
         const text = isOpen ? 'hide comments' : 'show comments'
         return (
             <div>
-                <button onClick={toggleOpen}>{text}</button>
+                <button className="test__comment-list--button" onClick={toggleOpen}>{text}</button>
                 {this.getBody()}
             </div>
         )
@@ -37,7 +37,7 @@ class CommentList extends Component {
         ) : <h3>No comments yet</h3>
 
         return (
-            <div>
+            <div className={"test__comment-list--body"}>
                 {body}
             </div>
         )
