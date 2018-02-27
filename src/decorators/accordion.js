@@ -2,7 +2,7 @@ import React from 'react'
 
 export default (OriginalAccordion) => class DecoratedAccordion extends React.Component {
     state = {
-        openItemId: null
+        openItemId: this.props.defaultOpenId
     }
 
     toggleItem = openItemId => this.setState({ openItemId })
