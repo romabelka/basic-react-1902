@@ -4,7 +4,7 @@ import CSSTransition from 'react-addons-css-transition-group'
 import CommentList from '../comment-list'
 import './style.css'
 
-class Article extends PureComponent {
+export class Article extends PureComponent {
     state = {
         error: null
     }
