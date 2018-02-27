@@ -1,7 +1,9 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import PropTypes from 'prop-types'
-import Comment from './comment'
-import toggleOpen from '../decorators/toggleOpen'
+import Comment from '../comment/index'
+import toggleOpen from '../../decorators/toggleOpen'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import './style.css';
 
 class CommentList extends Component {
     static defaultProps = {
@@ -20,8 +22,15 @@ class CommentList extends Component {
         const text = isOpen ? 'hide comments' : 'show comments'
         return (
             <div>
-                <button onClick={toggleOpen}>{text}</button>
-                {this.getBody()}
+                <button onClick={toggleOpen} className="test__comments--button">{text}</button>
+                <ReactCSSTransitionGroup
+                  transitionName="comment"
+                  transitionEnterTimeout={700}
+                  transitionLeaveTimeout={500}
+                  component={Fragment}
+                >
+                    {this.getBody()}
+                </ReactCSSTransitionGroup>
             </div>
         )
     }
@@ -31,7 +40,7 @@ class CommentList extends Component {
         if (!isOpen) return null
 
         const body = comments.length ? (
-            <ul>
+            <ul className="test__comments--list">
                 {comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)}
             </ul>
         ) : <h3>No comments yet</h3>

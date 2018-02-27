@@ -1,10 +1,25 @@
 import React, {PureComponent, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
-import CommentList from '../comment-list'
+import CommentList from '../comments-list/index'
 import './style.css'
 
 class Article extends PureComponent {
+
+  static propTypes = {
+    isOpen: PropTypes.bool,
+    article: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      text: PropTypes.string
+    }).isRequired,
+    onButtonClick: PropTypes.func
+  }
+
+  static defaultProps = {
+    isOpen: false,
+    onButtonClick: f => f
+  };
+
     state = {
         error: null
     }
@@ -19,7 +34,7 @@ class Article extends PureComponent {
 
         const { isOpen, article, onButtonClick } = this.props
         return (
-            <Fragment>
+            <div>
                 <h2>
                     {article.title}
                     <button
@@ -39,9 +54,10 @@ class Article extends PureComponent {
                 >
                     {isOpen && getBody(article)}
                 </CSSTransition>
-            </Fragment>
+            </div>
         )
     }
+
 }
 
 function getBody(article) {
@@ -51,16 +67,6 @@ function getBody(article) {
             <CommentList comments={article.comments}/>
         </section>
     )
-}
-
-
-Article.propTypes = {
-    isOpen: PropTypes.bool,
-    article: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        text: PropTypes.string
-    }).isRequired,
-    onButtonClick: PropTypes.func
 }
 
 export default Article
