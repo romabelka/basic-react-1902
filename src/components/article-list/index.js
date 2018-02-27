@@ -20,7 +20,7 @@ class ArticleList extends Component {
         const { articles, openItemId, toggleItem } = this.props
         const articleElements = articles.map(article =>
             <li key = {article.id} className = "test__article-list--item">
-                <Article
+                <Article 
                     article = {article}
                     onButtonClick = {toggleItem}
                     isOpen = {openItemId === article.id}
