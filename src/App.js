@@ -6,7 +6,6 @@ import Chart from './components/chart'
 import UserForm from './components/user-form'
 import Filters from './components/filters'
 import 'react-select/dist/react-select.css'
-import DayPickerInstance from './daypicker'
 
 class App extends Component {
     static propTypes = {

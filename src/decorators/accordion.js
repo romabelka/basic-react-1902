@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default (OriginalAccordion) => class DecoratedAccordion extends React.Component {
+export default (OriginalComponent) => class DecoratedComponent extends React.Component {
     state = {
         openItemId: this.props.defaultOpenId
     }
@@ -9,6 +9,6 @@ export default (OriginalAccordion) => class DecoratedAccordion extends React.Com
 
 
     render() {
-        return <OriginalAccordion {...this.props} {...this.state} toggleItem = {this.toggleItem} />
+        return <OriginalComponent {...this.props} {...this.state} toggleItem = {this.toggleItem} />
     }
 }
