@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-day-picker": "^7.0.7",
     "react-dom": "^16.2.0",
     "react-scripts": "1.1.1",
     "react-select": "^1.2.1"
