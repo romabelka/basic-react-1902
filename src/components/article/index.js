@@ -19,7 +19,7 @@ class Article extends PureComponent {
 
         const { isOpen, article, onButtonClick } = this.props
         return (
-            <Fragment>
+            <div>
                 <h2>
                     {article.title}
                     <button
@@ -39,7 +39,7 @@ class Article extends PureComponent {
                 >
                     {isOpen && getBody(article)}
                 </CSSTransition>
-            </Fragment>
+            </div>
         )
     }
 }
