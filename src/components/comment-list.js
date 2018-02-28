@@ -23,7 +23,16 @@ class CommentList extends Component {
         return (
             <div>
                 <button className = "test__comment--button" onClick={toggleOpen}>{text}</button>
+                <CSSTransition
+                    transitionName = "article"
+                    transitionAppear
+                    transitionEnterTimeout = {500}
+                    transitionLeaveTimeout = {300}
+                    transitionAppearTimeout = {1000}
+                    component = 'div'
+                >
                 {this.getBody()}
+                </CSSTransition>
             </div>
         )
     }
@@ -40,16 +49,7 @@ class CommentList extends Component {
 
         return (
             <div>
-                <CSSTransition
-                    transitionName = "article"
-                    transitionAppear
-                    transitionEnterTimeout = {500}
-                    transitionLeaveTimeout = {300}
-                    transitionAppearTimeout = {1000}
-                    component = 'div'
-                >
                 {body}
-                </CSSTransition>
             </div>
         )
     }
