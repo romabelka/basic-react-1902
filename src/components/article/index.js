@@ -1,7 +1,7 @@
 import React, {PureComponent, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
-import CommentList from '../comment-list'
+import CommentList from '../comment-list/index'
 import './style.css'
 
 class Article extends PureComponent {
