@@ -16,6 +16,11 @@ describe("Article",() => {
         expect(wrapper.find(".test__article--body").length).toEqual(0)
     })
 
+    it("should have article text if opened",() => {
+        const wrapper = render(<Article isOpen={true} article={articles[0]}/>)
+        expect(wrapper.find(".test__article--body").length).toEqual(1)
+    })
+
     it("should open comments on click and then close on click",() => {
         const wrapper = mount(<Article isOpen={true} article={articles[0]}/>)
 
