@@ -1,0 +1,29 @@
+.comments {
+	overflow-y: hidden;
+	height: auto;
+	transition: max-height 800ms ease;
+}
+
+.comments-enter {
+	max-height: 0;
+}
+
+.comments-enter.comments-enter-active {
+	max-height: 200px;
+}
+
+.comments-appear {
+	max-height: 0;
+}
+
+.comments-appear.comments-appear-active {
+	max-height: 200px;
+}
+
+.comments-leave {
+	max-height: 200px;
+}
+
+.comments-leave.comments-leave-active {
+	max-height: 0;
+}
