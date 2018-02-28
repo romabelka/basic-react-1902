@@ -24,6 +24,7 @@ describe('Article List', () => {
         expect(wrapper.find('.test__article--body').length).toEqual(1)
     });
 
+
     it('should fetch data on mount', () => {
         let triggered
         mount(<ArticleList articles={[]} fetchData = {() => triggered = true}/>)

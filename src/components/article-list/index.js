@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Article from '../article'
 import accordion from '../../decorators/accordion'
+import './style.css'
 
 class ArticleList extends Component {
     static propTypes = {
