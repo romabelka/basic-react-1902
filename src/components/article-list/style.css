@@ -1,0 +1,26 @@
+.component-enter {
+	opacity: 0.01;
+}
+
+.component-enter.component-enter-active {
+	opacity: 1;
+	transition: opacity 500ms ease-in;
+}
+
+.component-appear {
+	opacity: 0.01;
+}
+
+.component-appear.component-appear-active {
+	opacity: 1;
+	transition: opacity 1000ms ease-in;
+}
+
+.component-leave {
+	opacity: 1;
+}
+
+.component-leave.component-leave-active {
+	opacity: 0.01;
+	transition: opacity 300ms ease-in;
+}

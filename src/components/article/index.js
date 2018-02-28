@@ -1,8 +1,7 @@
 import React, {PureComponent, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
-import CommentList from '../comment-list'
-import './style.css'
+import CommentList from '../../components/comments-list/comment-list'
 
 class Article extends PureComponent {
     state = {
@@ -30,7 +29,7 @@ class Article extends PureComponent {
                     </button>
                 </h2>
                 <CSSTransition
-                    transitionName = "article"
+                    transitionName = "component"
                     transitionAppear
                     transitionEnterTimeout = {500}
                     transitionLeaveTimeout = {300}
