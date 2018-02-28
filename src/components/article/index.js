@@ -18,10 +18,11 @@ class Article extends PureComponent {
         if (this.state.error) return <h2>{this.state.error.message}</h2>
 
         const { isOpen, article, onButtonClick } = this.props
+
         return (
             <Fragment>
                 <h2>
-                    {article.title}
+                    <span className="test__article--title">{article.title}</span>
                     <button
                         className = "test__article--button"
                         onClick={() => onButtonClick(article.id)}
