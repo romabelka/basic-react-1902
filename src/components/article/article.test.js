@@ -2,6 +2,7 @@ import React from 'react'
 import {render, mount, shallow} from 'enzyme'
 import Article from './index'
 import articles from '../../fixtures'
+import CommentList from "../comments-list";
 
 describe('Article', function () {
   let firstArticle;
@@ -33,5 +34,16 @@ describe('Article', function () {
     wrapper.find('.test__comments--button').at(0).simulate('click');
     //console.log(wrapper.html());
     expect(wrapper.find('.test__comments--list').length).toEqual(1);
+  });
+
+  it('should at first open comments list and then CLOSE it', function () {
+    let wrapper = mount(<Article article={firstArticle} isOpen={true} />);
+
+    wrapper.find('.test__comments--button').at(0).simulate('click');
+    wrapper.find('.test__comments--button').at(0).simulate('click');
+
+    let isOpen = wrapper.find(CommentList).instance().state.isOpen;
+
+    expect(isOpen).toEqual(false);
   });
 });
