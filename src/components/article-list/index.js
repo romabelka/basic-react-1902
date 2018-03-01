@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Article from '../article'
 import accordion from '../../decorators/accordion'
 
-class ArticleList extends Component {
+export class ArticleList extends Component {
     static propTypes = {
         articles: PropTypes.array.isRequired,
 
