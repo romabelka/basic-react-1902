@@ -5,6 +5,7 @@ import ArticleList from './components/article-list'
 import Chart from './components/chart'
 import UserForm from './components/user-form'
 import Filters from './components/filters'
+import Counter from './components/counter'
 import 'react-select/dist/react-select.css'
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
         return (
             <div>
                 <UserForm />
+                <Counter />
                 <Filters articles = {articles}/>
                 <ArticleList articles = {articles} ref = {this.setListRef} defaultOpenId = {articles[0].id}/>
                 <Chart articles = {articles}/>
