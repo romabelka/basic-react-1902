@@ -3,7 +3,7 @@ import {render, mount, shallow} from 'enzyme'
 import ArticleListDecorated, {ArticleList} from './index'
 import articles from '../../fixtures'
 
-describe('Article List', () => {
+describe.skip('Article List', () => {
     it('should render article list', () => {
         const wrapper = shallow(<ArticleList articles = {articles}/>)
 
