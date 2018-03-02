@@ -1,4 +1,4 @@
-import { selectArticle, dateRange } from './'
+import { selectArticle, updateDateRange } from './'
 import { SELECT_ARTICLE, DATE_RANGE} from '../constants'
 import articles from '../fixtures'
 
@@ -17,7 +17,7 @@ describe('selectArticle', () => {
 describe('dateRange', () => {
   it('should change date range', () => {
     const dates = { from: 'Fri Mar 02 2018 12:00:00 GMT+0200 (EET)', to: 'Fri Mar 23 2018 12:00:00 GMT+0200 (EET)' }
-    const nextDateRange = dateRange(dates)
+    const nextDateRange = updateDateRange(dates)
 
     expect(nextDateRange).toEqual({
       type: DATE_RANGE,

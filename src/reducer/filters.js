@@ -1,7 +1,7 @@
 import { DATE_RANGE, SELECT_ARTICLE } from '../constants'
 
-const defaultFiltersState = {
-  dateRange: { start: null, end: null },
+export const defaultFiltersState = {
+  dateRange: { from: null, to: null },
   selectedArticles: []
 }
 

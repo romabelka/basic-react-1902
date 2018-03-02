@@ -23,7 +23,7 @@ export function selectArticle(article, selectedArticles) {
   }
 }
 
-export function dateRange({ from, to }) {
+export function updateDateRange({ from, to }) {
   return {
     type: DATE_RANGE,
     payload: { from, to }
