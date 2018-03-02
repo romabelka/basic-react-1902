@@ -4,12 +4,11 @@ import articles from '../fixtures'
 
 describe('selectArticle', () => {
   it('should add article to selected articles', () => {
-    const selectedArticles = [ { value: articles[0].id, label: articles[0].title }]
-    const nextSelectedArticles = selectArticle({ value: articles[1].id, label: articles[1].title }, selectedArticles)
+    const nextSelectedArticles = selectArticle({ value: articles[1].id, label: articles[1].title })
 
     expect(nextSelectedArticles).toEqual({
       type: SELECT_ARTICLE,
-      payload: [ { value: articles[0].id, label: articles[0].title }, { value: articles[1].id, label: articles[1].title } ]
+      payload: { value: articles[1].id, label: articles[1].title }
     })
   })
 })

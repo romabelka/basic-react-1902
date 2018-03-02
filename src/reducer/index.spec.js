@@ -7,7 +7,7 @@ describe('filters', () => {
   it('should add selected articles in state', () => {
     const action = {
       type: SELECT_ARTICLE,
-      payload: [ { value: articles[0].id, label: articles[0].title }]
+      payload: [{ value: articles[0].id, label: articles[0].title }]
     }
     const nexState = filters(defaultFiltersState, action)
     const expectResult = { ...defaultFiltersState, selectedArticles: [ { value: articles[0].id, label: articles[0].title }] }
