@@ -6,12 +6,8 @@ import { updateDateRange } from '../../AC'
 import 'react-day-picker/lib/style.css'
 
 class DateRange extends Component {
-    state = {
-        from: null,
-        to: null
-    }
 
-    handleDayClick = (day, range) => {
+    handleDayClick = day => {
       const { dateRange, updateDateRange } = this.props;
       const newRange = DateUtils.addDayToRange(day, dateRange)
       updateDateRange(newRange)
