@@ -8,7 +8,9 @@ import 'react-select/dist/react-select.css'
 
 class SelectFilter extends Component {
     static propTypes = {
-        articles: PropTypes.array.isRequired
+        articles: PropTypes.array.isRequired,
+        selectedArticles: PropTypes.array,
+        selectArticle: PropTypes.func
     };
 
     render() {

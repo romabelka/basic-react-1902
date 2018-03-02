@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import DayPicker, { DateUtils } from 'react-day-picker'
 import { updateDateRange } from '../../AC'
 
@@ -27,6 +28,11 @@ class DateRange extends Component {
         )
     }
 
+}
+
+DateRange.propTypes = {
+  dateRange: PropTypes.object,
+  updateDateRange: PropTypes.func
 }
 
 const mapStateToProps = state => {
