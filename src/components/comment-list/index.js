@@ -1,23 +1,13 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import toggleOpen from '../../decorators/toggleOpen'
-import CSSTransition from 'react-addons-css-transition-group'
-
 import './style.css'
 
 class CommentList extends Component {
-    state = {
-        error: null
-    }
-
     static defaultProps = {
         comments: []
-    }
-
-    componentDidCatch(error) {
-        console.log(error)
-        this.setState({error})
     }
 
     static propTypes = {
@@ -28,22 +18,19 @@ class CommentList extends Component {
     }
 
     render() {
-        if (this.state.error) return <h2>{this.state.error.message}</h2>
-
         const {isOpen, toggleOpen} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'
         return (
-            <Fragment>
-                <button onClick={toggleOpen} className="comments__button">{text}</button>
+            <div>
+                <button onClick={toggleOpen} className="test__comment-list--btn">{text}</button>
                 <CSSTransition
-                    transitionName = "comments"
-                    transitionEnterTimeout = {500}
-                    transitionLeave = {false}
-                    component = {Fragment}
+                    transitionName="comments"
+                    transitionEnterTimeout={500}
+                    transitionLeaveTimeout={500}
                 >
                     {this.getBody()}
                 </CSSTransition>
-            </Fragment>
+            </div>
         )
     }
 
@@ -51,16 +38,27 @@ class CommentList extends Component {
         const {comments, isOpen} = this.props
         if (!isOpen) return null
 
-        const body = comments.length ? (
-            <ul className="comments-list">
-                {comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)}
-            </ul>
-        ) : <h3>No comments yet</h3>
-
         return (
-            <div>
-                {body}
+            <div className="test__comment-list--body">
+                {
+                    comments.length
+                        ? this.getComments()
+                        : <h3 className="test__comment-list--empty">No comments yet</h3>
+                }
             </div>
+        )
+    }
+
+    getComments() {
+        return (
+            <ul>
+                {
+                    this.props.comments.map(comment =>
+                        <li key={comment.id} className="test__comment-list--item">
+                            <Comment comment={comment}/>
+                        </li>)
+                }
+            </ul>
         )
     }
 }
