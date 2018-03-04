@@ -27,7 +27,7 @@ class SelectFilter extends Component {
  
     handleChange = selected => {
         const { selectArticle, article } = this.props
-        selectArticle(selected.map(article => article.value)) // или этот map можно/нужно перенети в AC?
+        selectArticle(selected.map(article => article.value)) // или этот map можно/нужно перенети в AC или редьюсер?
     }
 }
 
