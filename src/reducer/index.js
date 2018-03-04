@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import counterReducer from './counter'
+import counter from './counter'
 import articles from './articles'
+import filter from './filter'
 
 export default combineReducers({
-    counter: counterReducer,
-    articles
+    counter,
+    articles,
+    filter
 })

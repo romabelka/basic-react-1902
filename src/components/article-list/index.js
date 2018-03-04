@@ -13,11 +13,8 @@ export class ArticleList extends Component {
         toggleItem: PropTypes.func
     };
 
-    componentDidMount() {
-        this.props.fetchData && this.props.fetchData()
-    }
-
     render() {
+        
         const { articles, openItemId, toggleItem } = this.props
         const articleElements = articles.map(article =>
             <li key = {article.id} className = "test__article-list--item">
@@ -36,6 +33,9 @@ export class ArticleList extends Component {
     }
 }
 
-export default connect(state => ({
+const mapStateToProps = state => ({
+    // rangeDays: state.filter.range,
     articles: state.articles
-}))(accordion(ArticleList))
+})
+
+export default connect(mapStateToProps)(accordion(ArticleList))
