@@ -3,39 +3,42 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Article from '../article'
 import accordion from '../../decorators/accordion'
+import filterArticle from './filterArticles'
 
 export class ArticleList extends Component {
-    static propTypes = {
-        articles: PropTypes.array.isRequired,
+  static propTypes = {
+    articles: PropTypes.array.isRequired,
 
-        //from accordion decorator
-        openItemId: PropTypes.string,
-        toggleItem: PropTypes.func
-    };
+    //from accordion decorator
+    openItemId: PropTypes.string,
+    toggleItem: PropTypes.func
+  };
 
-    componentDidMount() {
-        this.props.fetchData && this.props.fetchData()
-    }
+  componentDidMount() {
+    this.props.fetchData && this.props.fetchData()
+  }
 
-    render() {
-        const { articles, openItemId, toggleItem } = this.props
-        const articleElements = articles.map(article =>
-            <li key = {article.id} className = "test__article-list--item">
-                <Article
-                    article = {article}
-                    onButtonClick = {toggleItem}
-                    isOpen = {openItemId === article.id}
-                />
-            </li>
-        )
-        return (
-            <ul>
-                {articleElements}
-            </ul>
-        )
-    }
+  render() {
+    const { articles, openItemId, toggleItem } = this.props
+    const articleElements = articles.map(article =>
+      <li key = {article.id} className = "test__article-list--item">
+        <Article
+          article = {article}
+          onButtonClick = {toggleItem}
+          isOpen = {openItemId === article.id}
+        />
+      </li>
+    )
+    return (
+      <ul>
+        {articleElements}
+      </ul>
+    )
+  }
 }
 
-export default connect(state => ({
-    articles: state.articles
-}))(accordion(ArticleList))
+export default connect(
+  state => ({
+    articles: filterArticle(state)
+  })
+)(accordion(ArticleList))
