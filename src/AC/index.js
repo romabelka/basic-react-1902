@@ -1,4 +1,4 @@
-import { INCREMENT, DELETE_ARTICLE } from '../constants'
+import { INCREMENT, DELETE_ARTICLE, FILTER_SELECT, FILTER_DATE_RANGE } from '../constants'
 
 export function increment() {
     return {
@@ -11,4 +11,18 @@ export function deleteArticle(id) {
         type: DELETE_ARTICLE,
         payload: { id }
     }
+}
+
+export function filterSelect(selected) {
+  return {
+      type: FILTER_SELECT,
+      payload: { selected }
+  }
+}
+
+export function filterDateRange(range) {
+  return {
+    type: FILTER_DATE_RANGE,
+    payload: { range }
+  }
 }
