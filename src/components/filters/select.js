@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
-
+import {connect} from 'react-redux'
+import {filterSet} from '../../AC'
+import store from '../../store'
 import 'react-select/dist/react-select.css'
 
 class SelectFilter extends Component {
@@ -10,13 +12,30 @@ class SelectFilter extends Component {
     };
 
     state = {
-        selected: null
+        selected: store.getState().filterset.selected
     }
 
-    handleChange = selected => this.setState({ selected })
+    componentDidMount(){
+        this.unsubscr = store.subscribe(this.handleStoreChange)
+    }
+
+    componentWillUnmout(){
+        this.unsubscr()
+    }
+
+    handleChange = selected => {
+        const action = filterSet(selected)
+        this.props.dispatch(action)
+    }
+    handleStoreChange = () => {
+        this.setState({
+            selected: store.getState().filterset.selected
+        })
+    }
 
     render() {
-        const { articles } = this.props
+        const { articles} = this.props
+
         const options = articles.map(article => ({
             label: article.title,
             value: article.id
@@ -31,4 +50,6 @@ class SelectFilter extends Component {
     }
 }
 
-export default SelectFilter
+export default connect(state => ({
+    articles: state.articles
+}))(SelectFilter)
