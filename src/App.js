@@ -15,7 +15,7 @@ class App extends Component {
             <div>
                 <UserForm />
                 <Counter />
-                <Filters articles = {[]}/>
+                <Filters />
                 <ArticleList ref = {this.setListRef} />
             </div>
         )
