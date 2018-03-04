@@ -9,10 +9,9 @@ export default (articlesState = defaultArticles, action) => {
             return articlesState.filter(article => article.id !== payload.id)
         case SELECTED_ARTICLES:
             let idList = payload.selectedArticles.map(selectedArticle => selectedArticle.value)
-            return articlesState.filter(article =>
+            return defaultArticles.filter(article =>
                idList.includes(article.id)
             )
-
         default:
             return articlesState
     }
