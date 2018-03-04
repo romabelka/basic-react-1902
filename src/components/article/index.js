@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 import CommentList from '../comment-list'
-import { deleteArticle } from '../../AC'
+import { deleteArticle } from '../../action-creators'
 import './style.css'
 
 class Article extends PureComponent {
