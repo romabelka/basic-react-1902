@@ -20,6 +20,7 @@ class Counter extends Component {
     }
 
     handleIncrement = () => {
+        console.log('count', this.props.count);
         const action = increment()
         this.props.dispatch(action)
     }
