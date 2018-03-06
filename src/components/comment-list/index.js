@@ -17,6 +17,20 @@ class CommentList extends Component {
         toggleOpen: PropTypes.func
     }
 
+    state = {
+      user: '',
+      message: '',
+    }
+
+    handleOnSubmit = event => {
+      event.preventDefault()
+      console.log('it is ok');
+    }
+
+    handleOnChange = (event, field) => {
+      this.setState({ [field]: event.target.value })
+    }
+
     render() {
         const {isOpen, toggleOpen} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'
@@ -36,10 +50,34 @@ class CommentList extends Component {
 
     getBody() {
         const {comments, isOpen} = this.props
+        const { user, message } = this.state
         if (!isOpen) return null
 
         return (
             <div className="test__comment-list--body">
+                <form>
+                  <div>
+                    <input
+                      type="text"
+                      name="user"
+                      placeholder="Name"
+                      value={user}
+                      onChange={(event) => this.handleOnChange(event, 'user')}
+                    />
+                  </div>
+                  <div>
+                    <textarea
+                      name="message"
+                      rows="10"
+                      cols="30"
+                      placeholder="Text"
+                      onChange={(event) => this.handleOnChange(event, 'message')}
+                    />
+                  </div>
+                  <div>
+                    <button onClick={this.handleOnSubmit} >Submit</button>
+                  </div>
+                </form>
                 {
                     comments.length
                         ? this.getComments()
