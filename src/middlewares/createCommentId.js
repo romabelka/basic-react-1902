@@ -3,20 +3,8 @@ import { CREATE_COMMENT } from '../constants'
 
 export default store => next => action => {
   if (action.type === CREATE_COMMENT) {
-    const comment = {
-      ...action.payload,
-      id: uuid()
-     }
-
-     const newAction = {
-       ...action,
-       payload: comment,
-     }
-
-     console.log(comment)
-
-     next(newAction)
-  } else {
-    next(action)
-  }
+    const comment = { ...action.payload, id: uuid() }
+    const newAction = { ...action, payload: comment }
+    next(newAction)
+  } else next(action)
 }
