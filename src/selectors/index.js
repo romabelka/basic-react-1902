@@ -16,4 +16,6 @@ export const filtratedArticles = createSelector(articleListSelector, filtersSele
     })
 })
 
+export const getCommentsByArticle = (state, props) => state.comments.commentsByAricle[props.articleId]
+
 export const createCommentSelector = () => createSelector(commentsSelector, idSelector, (comments, id) => comments[id])
