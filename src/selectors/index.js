@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 
-const articleListSelector = state => state.articles
+export const articleListSelector = state => Object.values(state.articles)
 const commentsSelector = state => state.comments
 const filtersSelector = state => state.filters
 const idSelector = (_, props) => props.id
@@ -15,5 +15,7 @@ export const filtratedArticles = createSelector(articleListSelector, filtersSele
             (!from || !to || (published > from && published < to))
     })
 })
+
+export const getCommentsByArticle = (state, props) => state.comments.commentsByAricle[props.articleId]
 
 export const createCommentSelector = () => createSelector(commentsSelector, idSelector, (comments, id) => comments[id])
