@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 import CommentList from '../comment-list'
+import CommentForm from '../comment-form'
 import { deleteArticle } from '../../AC'
 import './style.css'
 
@@ -34,6 +35,8 @@ class Article extends PureComponent {
                         delete me
                     </button>
                 </h2>
+                /* button comment me*/
+                <CommentForm rel={article.id}/>
                 <CSSTransition
                     transitionName = "article"
                     transitionAppear
