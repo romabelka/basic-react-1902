@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
@@ -30,6 +30,14 @@ class CommentList extends Component {
                 >
                     {this.getBody()}
                 </CSSTransition>
+
+                { isOpen && <Fragment>
+                    <textarea style={{ width: '100%'}} />
+                    <br/>
+                    <button onClick = {this.handleAdd}>
+                        add comment
+                    </button>
+                </Fragment> }
             </div>
         )
     }

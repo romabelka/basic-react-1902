@@ -48,6 +48,10 @@ class Article extends PureComponent {
         )
     }
 
+    handleAdd = () => {
+
+    }
+
     handleDelete = () => {
         const { deleteArticle, article } = this.props
         deleteArticle(article.id)
