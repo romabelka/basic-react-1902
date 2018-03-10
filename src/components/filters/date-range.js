@@ -9,11 +9,11 @@ import 'react-day-picker/lib/style.css'
 class DateRange extends Component {
 
   handleDayClick = (day) => {
-    this.props.updateFilterDate(DateUtils.addDayToRange(day, this.props.filterDate))
+    this.props.updateFilterDate(DateUtils.addDayToRange(day, this.props.filter))
   }
 
   render() {
-    const { from, to } = this.props.filterDate
+    const { from, to } = this.props.filter
 
     const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
     return (
@@ -30,7 +30,7 @@ class DateRange extends Component {
 
 export default connect(
   state => ({
-    filterDate: state.filterDate
+    filter: state.filter.date
   }),
   { updateFilterDate }
 )(DateRange)

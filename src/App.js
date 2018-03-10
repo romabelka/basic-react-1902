@@ -23,7 +23,6 @@ class App extends Component {
 
     setListRef = ref => {
         this.listRef = ref
-        console.log(findDOMNode(ref))
     }
 }
 
