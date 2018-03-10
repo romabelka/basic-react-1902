@@ -20,7 +20,6 @@ Comment.propTypes = {
 
 const createMapStateToProps = () => {
     const commentSelector = createCommentSelector()
-
     return (state, ownProps) => ({
         comment: commentSelector(state, ownProps)
     })

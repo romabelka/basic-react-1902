@@ -25,18 +25,6 @@ class DateRange extends Component {
             </div>
         );
     }
-
-    const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
-    return (
-        <div className="date-range">
-            <DayPicker
-                selectedDays={ day => DateUtils.isDayInRange(day, { from, to }) }
-                onDayClick={ this.handleDayClick }
-            />
-            {selectedRange}
-        </div>
-    )
-  }
 }
 
 export default connect(state => ({
