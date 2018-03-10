@@ -6,18 +6,21 @@ const defaultArticles = normalizedArticles.reduce((wii, article)=>({
     [article.id]: article
 }), {})
 
-export const listArticles = normalizedArticles
-
-export default (articlesState = normalizedArticles, action) => {
-    console.log("! ", defaultArticles)
+export default (articlesState = defaultArticles, action) => {
 
     const { type, payload } = action
 
+    let articles = Object.assign({}, articlesState);
     switch (type) {
         case DELETE_ARTICLE:
-            return articlesState.filter(article => article.id !== payload.id)
+            delete articles[payload.id]
+            return articles
+
         case ADD_COMMENT:
-            //articlesState
+            let comments = articles[payload.data.articleid].comments
+            typeof comments !== 'undefined' ? comments.push(payload.data.id) : comments = new Array(payload.data.id)
+            return articles
+
         default:
             return articlesState
     }

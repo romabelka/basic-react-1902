@@ -35,7 +35,7 @@ class Article extends PureComponent {
                         delete me
                     </button>
                 </h2>
-                /* button comment me*/
+                
                 <CommentForm rel={article.id}/>
                 <CSSTransition
                     transitionName = "article"
