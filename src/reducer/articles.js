@@ -1,20 +1,23 @@
-import { normalizedArticles as defaultArticles } from '../fixtures'
-import { DELETE_ARTICLE } from '../constants'
+import { normalizedArticles } from '../fixtures'
+import { DELETE_ARTICLE, ADD_COMMENT } from '../constants'
 
-const commentsObj = defaultArticles.reduce((wii, article)=>({
+const defaultArticles = normalizedArticles.reduce((wii, article)=>({
     ...wii,
     [article.id]: article
 }), {})
 
-export default (articlesState = defaultArticles, action) => {
-    console.log("! ", commentsObj)
+export const listArticles = normalizedArticles
+
+export default (articlesState = normalizedArticles, action) => {
+    console.log("! ", defaultArticles)
 
     const { type, payload } = action
 
     switch (type) {
         case DELETE_ARTICLE:
             return articlesState.filter(article => article.id !== payload.id)
-
+        case ADD_COMMENT:
+            //articlesState
         default:
             return articlesState
     }

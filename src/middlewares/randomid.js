@@ -1,3 +1,4 @@
+import { ADD_COMMENT } from '../constants'
 /**
  * Shuffles array in place. ES6 version
  * @param {Array} a items An array containing the items.
@@ -11,6 +12,11 @@ function shuffle(a) {
 }
 
 export default store => next => action => {
-    console.log('RANDOMIZER ' + shuffle((new Date).toLocaleString('en-US').split('').filter((symbol)=>{return symbol != ' '})).join(''))
+    if (action.type === ADD_COMMENT) {
+      const randomId = shuffle((new Date()).toLocaleString('en-US').split('').filter((symbol)=> {
+                return symbol !== ' '
+            })).join('')
+      action.payload.data['id'] = randomId
+    }
     next(action)
 }
