@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addComment } from '../AC'
+import toggleOpen from '../decorators/toggleOpen'
 
 class CommentForm extends Component {
     state = {
@@ -10,23 +11,27 @@ class CommentForm extends Component {
 
     render() {
 
-        const {rel} = this.props
-        return (
-            <form method="post">
+        const {rel, isOpen, toggleOpen} = this.props
 
-                <label htmlFor={"authorname-" + rel}>name: </label>
-                <input type="text"
+        return (
+            <div>
+                <button onClick = {toggleOpen}>comment me</button>
+                <form method="post" style={{display: isOpen ? "block": "none"}}>
+
+                    <label htmlFor={"authorname-" + rel}>name: </label>
+                    <input type="text"
                        name="authorname"
                        id={"authorname-" + rel}
                        value={this.state.authorname}
                        onChange={this.handleInput}
-                /><br/>
+                    /><br/>
 
-                <label htmlFor={"newcommenttext-" + rel}>text: </label>
-                <textarea name="text" id={"newcommenttext-" + rel} onChange={this.handleTextChange}
+                    <label htmlFor={"newcommenttext-" + rel}>text: </label>
+                    <textarea name="text" id={"newcommenttext-" + rel} onChange={this.handleTextChange}
                           value={this.state.commenttext}></textarea> <br/>
-                <input type="button" onClick={this.handleAddcommentClick} value="Add"/>
-            </form>
+                    <input type="button" onClick={this.handleAddcommentClick} value="Add"/>
+                </form>
+            </div>
         )
     }
 
@@ -43,12 +48,13 @@ class CommentForm extends Component {
     }
 
     handleAddcommentClick = () => {
-        const {addComment, rel} = this.props
+        const {addComment, rel, toggleOpen} = this.props
         if (this.state.authorname.length && this.state.commenttext.length ) {
+            toggleOpen()
             addComment({articleid: rel, user: this.state.authorname, text: this.state.commenttext})
             this.setState({authorname: '', commenttext:''})
         }
     }
 }
 
-export default connect(null, { addComment })(CommentForm)
+export default connect(null, { addComment })(toggleOpen(CommentForm))

@@ -10,16 +10,16 @@ export default (articlesState = defaultArticles, action) => {
 
     const { type, payload } = action
 
-    let articles = Object.assign({}, articlesState);
     switch (type) {
         case DELETE_ARTICLE:
+            let articles = Object.assign({}, articlesState);
             delete articles[payload.id]
             return articles
 
         case ADD_COMMENT:
-            let comments = articles[payload.data.articleid].comments
-            typeof comments !== 'undefined' ? comments.push(payload.data.id) : comments = new Array(payload.data.id)
-            return articles
+            let comments = articlesState[payload.data.articleid].comments
+            typeof comments !== 'undefined' ? comments.push(payload.data.id) : articlesState[payload.data.articleid].comments = new Array(payload.data.id)
+            //break
 
         default:
             return articlesState
