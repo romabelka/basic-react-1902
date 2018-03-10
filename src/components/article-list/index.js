@@ -21,7 +21,7 @@ export class ArticleList extends Component {
     render() {
         const { articles, openItemId, toggleItem } = this.props
         console.log('---', 'rendering ArticlList')
-        const articleElements = articles.map(article =>
+        const articleElements = Object.values(articles).map(article =>
             <li key = {article.id} className = "test__article-list--item">
                 <Article
                     article = {article}
