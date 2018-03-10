@@ -12,10 +12,9 @@ export default (commentsState = defaultComments, action) => {
 
   switch (type) {
     case ADD_COMMENT:
-      console.log('add comment')
       return {
         ...commentsState,
-        payload
+        [payload.comment.id]: payload.comment
       }
     default:
       return commentsState

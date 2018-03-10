@@ -19,6 +19,8 @@ class Article extends PureComponent {
     render() {
         if (this.state.error) return <h2>{this.state.error.message}</h2>
 
+        console.log('---', 'Article rendering')
+
         const { isOpen, article, onButtonClick } = this.props
         return (
             <Fragment>
@@ -42,9 +44,18 @@ class Article extends PureComponent {
                     transitionAppearTimeout = {1000}
                     component = {Fragment}
                 >
-                    {isOpen && getBody(article)}
+                    {isOpen && this.getBody(article)}
                 </CSSTransition>
             </Fragment>
+        )
+    }
+
+    getBody = (article) => {
+        return (
+            <section className = "test__article--body">
+                {article.text}
+                <CommentList articleId = {article.id} />
+            </section>
         )
     }
 
@@ -53,16 +64,6 @@ class Article extends PureComponent {
         deleteArticle(article.id)
     }
 }
-
-function getBody(article) {
-    return (
-        <section className = "test__article--body">
-            {article.text}
-            <CommentList comments={article.comments} addComment = {addComment}/>
-        </section>
-    )
-}
-
 
 Article.propTypes = {
     isOpen: PropTypes.bool,

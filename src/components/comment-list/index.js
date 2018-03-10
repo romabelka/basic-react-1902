@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
+import CommentAddForm from '../comment/comment-add'
 import toggleOpen from '../../decorators/toggleOpen'
 import './style.css'
 
@@ -12,17 +14,16 @@ class CommentList extends Component {
 
     static propTypes = {
         comments: PropTypes.array.isRequired,
+        articleId: PropTypes.string.isRequired,
+
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     }
 
-    state = {
-        textIsEmpty: true,
-        nameIsEmpty: true
-    }
 
     render() {
+        console.log('render comments list');
         const {isOpen, toggleOpen} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'
         return (
@@ -39,22 +40,8 @@ class CommentList extends Component {
         )
     }
 
-    handeChangeName = (e) => {
-        e.target.value.trim().length ? this.setState({ nameIsEmpty: false }) : this.setState({ nameIsEmpty: true })
-    }
-
-    handeChangeText = (e) => {
-        e.target.value.trim().length ? this.setState({ textIsEmpty: false }) : this.setState({ textIsEmpty: true })
-    }
-
-    handleAddComment = () => {
-        const { addComment } = this.props
-        const { commentName, commentText } = this.refs
-        //addComment(commentName.value, commentText.value)
-    }
-
     getBody() {
-        const {comments, isOpen, addComment} = this.props
+        const {comments, isOpen} = this.props
 
         if (!isOpen) return null
 
@@ -65,30 +52,7 @@ class CommentList extends Component {
                         ? this.getComments()
                         : <h3 className="test__comment-list--empty">No comments yet</h3>
                 }
-                <div>
-                    <p><b>Добавить комментарий:</b></p>
-                    <input
-                        type="text"
-                        ref="commentName"
-                        className="comments-list__name"
-                        placeholder="Ваше имя"
-                        onChange = { this.handeChangeName }
-                    />
-                    <textarea
-                        placeholder="Текст комментария"
-                        className="comments-list__text"
-                        ref="commentText"
-                        onChange = { this.handeChangeText }
-                        >
-                    </textarea>
-                    <button
-                        className="comments-list__add"
-                        onClick = { this.handleAddComment }
-                        disabled = { this.state.textIsEmpty || this.state.nameIsEmpty }
-                        >
-                        Добавить
-                    </button>
-                </div>
+                <CommentAddForm articleId = {this.props.articleId} />
             </div>
         )
     }
@@ -108,4 +72,8 @@ class CommentList extends Component {
 }
 
 
-export default toggleOpen(CommentList)
+export default connect((state, { articleId }) => {
+    return {
+        comments: state.articles[articleId].comments
+    }
+})(toggleOpen(CommentList))
