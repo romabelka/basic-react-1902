@@ -6,17 +6,17 @@ import accordion from '../../decorators/accordion'
 import { filtratedArticles } from '../../selectors'
 
 export class ArticleList extends Component {
-    static propTypes = {
-        articles: PropTypes.array.isRequired,
+  static propTypes = {
+    articles: PropTypes.array.isRequired,
 
-        //from accordion decorator
-        openItemId: PropTypes.string,
-        toggleItem: PropTypes.func
-    };
+    //from accordion decorator
+    openItemId: PropTypes.string,
+    toggleItem: PropTypes.func
+  };
 
-    componentDidMount() {
-        this.props.fetchData && this.props.fetchData()
-    }
+  componentDidMount() {
+    this.props.fetchData && this.props.fetchData()
+  }
 
     render() {
         const { articles, openItemId, toggleItem } = this.props

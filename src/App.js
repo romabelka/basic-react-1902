@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {findDOMNode} from 'react-dom'
 import ArticleList from './components/article-list'
 import UserForm from './components/user-form'
 import Filters from './components/filters'
@@ -16,14 +15,9 @@ class App extends Component {
                 <UserForm />
                 <Counter />
                 <Filters />
-                <ArticleList ref = {this.setListRef} />
+                <ArticleList />
             </div>
         )
-    }
-
-    setListRef = ref => {
-        this.listRef = ref
-        console.log(findDOMNode(ref))
     }
 }
 
