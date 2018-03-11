@@ -4,6 +4,7 @@ import CSSTransition from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 import CommentList from '../comment-list'
 import { deleteArticle } from '../../AC'
+import { createArticleSelector } from '../../selectors'
 import './style.css'
 
 class Article extends PureComponent {
@@ -48,6 +49,10 @@ class Article extends PureComponent {
         )
     }
 
+    handleAdd = () => {
+
+    }
+
     handleDelete = () => {
         const { deleteArticle, article } = this.props
         deleteArticle(article.id)
@@ -73,4 +78,13 @@ Article.propTypes = {
     onButtonClick: PropTypes.func
 }
 
-export default connect(null, { deleteArticle })(Article)
+const createMapStateToProps = () => {
+    const articleSelector = createArticleSelector()
+
+    return (state, ownProps) => ({
+        article: articleSelector(state, ownProps)
+    })
+}
+
+
+export default connect(createMapStateToProps, { deleteArticle })(Article)
