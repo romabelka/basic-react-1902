@@ -3,10 +3,13 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import toggleOpen from '../../decorators/toggleOpen'
+import { addComment } from '../../AC'
+import { connect } from 'react-redux'
 import './style.css'
 
 class CommentList extends Component {
     static defaultProps = {
+        comment: '',
         comments: []
     }
 
@@ -15,6 +18,19 @@ class CommentList extends Component {
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+    handleAdd = () => {
+        const { comment } = this.state
+        const { addComment } = this.props
+        console.log('add', comment)
+        addComment(comment)
+        this.setState({comment: ''})
+    }
+
+    handleChange = (event) => {
+      console.log('change', event.target.value)
+      this.setState({comment: event.target.value})
     }
 
     render() {
@@ -32,7 +48,7 @@ class CommentList extends Component {
                 </CSSTransition>
 
                 { isOpen && <Fragment>
-                    <textarea style={{ width: '100%'}} />
+                    <textarea onChange = {this.handleChange} style={{ width: '100%'}} />
                     <br/>
                     <button onClick = {this.handleAdd}>
                         add comment
@@ -58,6 +74,7 @@ class CommentList extends Component {
     }
 
     getComments() {
+      console.log('comments', this.props.comments)
         return (
             <ul>
                 {
@@ -71,5 +88,13 @@ class CommentList extends Component {
     }
 }
 
+const createMapStateToProps = (state, ownProps) => {
+  console.log('---', 'comnent list connect')
+  console.log('---', 'ownProps', ownProps)
+  return {
+      comments: ownProps.comments
+  }
+}
 
-export default toggleOpen(CommentList)
+// export default toggleOpen(CommentList)
+export default toggleOpen(connect(createMapStateToProps, { addComment })(CommentList))
