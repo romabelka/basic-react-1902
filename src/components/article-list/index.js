@@ -7,29 +7,29 @@ import { filtratedArticles } from '../../selectors'
 
 export class ArticleList extends Component {
     static propTypes = {
-        articles: PropTypes.array.isRequired,
+        articles: PropTypes.object.isRequired,
 
         //from accordion decorator
         openItemId: PropTypes.string,
         toggleItem: PropTypes.func
     };
 
-    componentDidMount() {
+    /*componentDidMount() {
         this.props.fetchData && this.props.fetchData()
-    }
+    }*/
 
     render() {
-        const { articles, openItemId, toggleItem } = this.props
-        console.log('---', 'rendering ArticlList')
-        const articleElements = articles.map(article =>
-            <li key = {article.id} className = "test__article-list--item">
-                <Article
-                    article = {article}
-                    onButtonClick = {toggleItem}
-                    isOpen = {openItemId === article.id}
-                />
-            </li>
-        )
+        const { articles, openItemId, toggleItem } = this.props;
+        console.log('---', 'rendering ArticleList');
+        const articleElements = Object.keys(articles).map((articleId) => {
+          return (<li key = {articleId} className = "test__article-list--item">
+            <Article
+              article = {articles[articleId]}
+              onButtonClick = {toggleItem}
+              isOpen = {openItemId === articleId}
+            />
+          </li>);
+        });
         return (
             <ul>
                 {articleElements}
