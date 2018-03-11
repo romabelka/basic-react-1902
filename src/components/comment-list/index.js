@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
+import AddCommentForm from '../add-comment-form'
 import toggleOpen from '../../decorators/toggleOpen'
 import './style.css'
 
@@ -35,7 +36,7 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {comments, isOpen} = this.props
+        const {comments, isOpen, articleId} = this.props
         if (!isOpen) return null
 
         return (
@@ -45,6 +46,7 @@ class CommentList extends Component {
                         ? this.getComments()
                         : <h3 className="test__comment-list--empty">No comments yet</h3>
                 }
+                <AddCommentForm articleId={articleId}/>
             </div>
         )
     }
@@ -62,6 +64,5 @@ class CommentList extends Component {
         )
     }
 }
-
 
 export default toggleOpen(CommentList)
