@@ -1,4 +1,4 @@
-import React, {PureComponent, Fragment} from 'react'
+import React, {PureComponent, Fragment, Component} from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
@@ -11,6 +11,15 @@ class Article extends PureComponent {
         error: null
     }
 
+    /*componentWillReceiveProps(nextProps) {
+        console.log('WillReceive Props => ', nextProps);
+    }*/
+
+    /*shouldComponentUpdate(nextProps, nextState) {
+        console.log('ShouldUpdate => ', nextProps);
+        return true;
+    }*/
+
     componentDidCatch(error) {
         console.log('---', error)
         this.setState({ error })
@@ -18,8 +27,9 @@ class Article extends PureComponent {
 
     render() {
         if (this.state.error) return <h2>{this.state.error.message}</h2>
-
         const { isOpen, article, onButtonClick } = this.props
+        console.log('---Article is rendering');
+
         return (
             <Fragment>
                 <h2>
@@ -58,7 +68,7 @@ function getBody(article) {
     return (
         <section className = "test__article--body">
             {article.text}
-            <CommentList comments={article.comments}/>
+            <CommentList comments={article.comments} articleId={article.id}/>
         </section>
     )
 }
@@ -66,11 +76,8 @@ function getBody(article) {
 
 Article.propTypes = {
     isOpen: PropTypes.bool,
-    article: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        text: PropTypes.string
-    }).isRequired,
+    article: PropTypes.object.isRequired,
     onButtonClick: PropTypes.func
-}
+};
 
 export default connect(null, { deleteArticle })(Article)

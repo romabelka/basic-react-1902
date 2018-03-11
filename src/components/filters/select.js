@@ -8,17 +8,17 @@ import 'react-select/dist/react-select.css'
 
 class SelectFilter extends Component {
     static propTypes = {
-        articles: PropTypes.array.isRequired
+        articles: PropTypes.object.isRequired
     };
 
     handleChange = selected => this.props.changeSelection(selected.map(option => option.value))
 
     render() {
-        const { articles, selected } = this.props
-        const options = articles.map(article => ({
-            label: article.title,
-            value: article.id
-        }))
+        const { articles, selected } = this.props;
+        const options = Object.keys(articles).map(articleId => ({
+            label: articles[articleId].title,
+            value: articleId
+        }));
 
         return <Select
             options={options}
