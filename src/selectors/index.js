@@ -8,12 +8,15 @@ const idSelector = (_, props) => props.id
 export const filtratedArticles = createSelector(articleListSelector, filtersSelector, (articles, filters) => {
     const {selected, dateRange: {from, to}} = filters
     console.log('---', 'recomputing filtration')
-
-    return articles.filter(article => {
-        const published = Date.parse(article.date)
-        return (!selected.length || selected.includes(article.id)) &&
-            (!from || !to || (published > from && published < to))
-    })
+    let filtratedArticlesArray = []
+    for (const id in articles){
+      const published = Date.parse(articles[id].date)
+      if ((!selected.length || selected.includes(articles[id])) &&
+          (!from || !to || (published > from && published < to))) {
+              filtratedArticlesArray.push(articles[id])
+          }
+    }
+    return filtratedArticlesArray
 })
 
 export const createCommentSelector = () => createSelector(commentsSelector, idSelector, (comments, id) => comments[id])
