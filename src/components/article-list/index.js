@@ -24,6 +24,7 @@ export class ArticleList extends Component {
         const articleElements = Object.keys(articles).map((articleId) => {
           return (<li key = {articleId} className = "test__article-list--item">
             <Article
+              commentsLength = {articles[articleId].comments ? articles[articleId].comments.length : 0}
               article = {articles[articleId]}
               onButtonClick = {toggleItem}
               isOpen = {openItemId === articleId}

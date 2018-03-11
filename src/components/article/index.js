@@ -6,10 +6,19 @@ import CommentList from '../comment-list'
 import { deleteArticle } from '../../AC'
 import './style.css'
 
-class Article extends Component {
+class Article extends PureComponent {
     state = {
         error: null
     }
+
+    /*componentWillReceiveProps(nextProps) {
+        console.log('WillReceive Props => ', nextProps);
+    }*/
+
+    /*shouldComponentUpdate(nextProps, nextState) {
+        console.log('ShouldUpdate => ', nextProps);
+        return true;
+    }*/
 
     componentDidCatch(error) {
         console.log('---', error)
