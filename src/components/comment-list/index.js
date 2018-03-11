@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
@@ -72,8 +71,4 @@ class CommentList extends Component {
 }
 
 
-export default connect((state, { articleId }) => {
-    return {
-        comments: state.articles[articleId].comments
-    }
-})(toggleOpen(CommentList))
+export default toggleOpen(CommentList)

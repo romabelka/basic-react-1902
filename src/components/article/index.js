@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 import CommentList from '../comment-list'
-import { deleteArticle, addComment } from '../../AC'
+import { deleteArticle } from '../../AC'
 import './style.css'
 
 class Article extends PureComponent {
@@ -18,8 +18,6 @@ class Article extends PureComponent {
 
     render() {
         if (this.state.error) return <h2>{this.state.error.message}</h2>
-
-        console.log('---', 'Article rendering')
 
         const { isOpen, article, onButtonClick } = this.props
         return (
@@ -54,7 +52,7 @@ class Article extends PureComponent {
         return (
             <section className = "test__article--body">
                 {article.text}
-                <CommentList articleId = {article.id} />
+                <CommentList articleId = {article.id} comments = {article.comments} />
             </section>
         )
     }
@@ -74,4 +72,4 @@ Article.propTypes = {
     onButtonClick: PropTypes.func
 }
 
-export default connect(null, { deleteArticle, addComment })(Article)
+export default connect(null, { deleteArticle })(Article)
