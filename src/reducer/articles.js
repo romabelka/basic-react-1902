@@ -12,7 +12,9 @@ export default (articlesState = defaultArticles, action) => {
 
     switch (type) {
         case DELETE_ARTICLE:
-            return articlesState.filter(article => article.id !== payload.id)
+            const articlesStateObj = articlesState
+            delete articlesStateObj[payload.id]
+            return articlesStateObj
 
         default:
             return articlesState

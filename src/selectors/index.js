@@ -9,9 +9,10 @@ export const filtratedArticles = createSelector(articleListSelector, filtersSele
     const {selected, dateRange: {from, to}} = filters
     console.log('---', 'recomputing filtration')
     let filtratedArticlesArray = []
+    debugger;
     for (const id in articles){
       const published = Date.parse(articles[id].date)
-      if ((!selected.length || selected.includes(articles[id])) &&
+      if ((!selected.length || selected.includes(id)) &&
           (!from || !to || (published > from && published < to))) {
               filtratedArticlesArray.push(articles[id])
           }
