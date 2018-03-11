@@ -42,7 +42,7 @@ class Article extends PureComponent {
                     transitionAppearTimeout = {1000}
                     component = {Fragment}
                 >
-                    {isOpen && getBody(article)}
+                    {isOpen && this.getBody(article)}
                 </CSSTransition>
             </Fragment>
         )
@@ -52,16 +52,20 @@ class Article extends PureComponent {
         const { deleteArticle, article } = this.props
         deleteArticle(article.id)
     }
+
+    getBody = (article) => {
+        const { comments } = this.props
+
+        return (
+            <section className = "test__article--body">
+                {article.text}
+                <CommentList articleId={article.id} comments={comments} />
+            </section>
+        )
+    }
+
 }
 
-function getBody(article) {
-    return (
-        <section className = "test__article--body">
-            {article.text}
-            <CommentList articleId={article.id} />
-        </section>
-    )
-}
 
 
 Article.propTypes = {

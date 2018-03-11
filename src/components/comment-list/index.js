@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
-import { connect } from 'react-redux'
 import AddCommentForm from '../add-comment-form'
 import toggleOpen from '../../decorators/toggleOpen'
 import './style.css'
@@ -65,8 +64,5 @@ class CommentList extends Component {
         )
     }
 }
-export default connect((store, {articleId}) => {
-    return {
-        comments: store.articles[articleId].comments
-    }
-})(toggleOpen(CommentList))
+
+export default toggleOpen(CommentList)

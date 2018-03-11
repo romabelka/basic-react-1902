@@ -27,6 +27,7 @@ export class ArticleList extends Component {
                     article = {article}
                     onButtonClick = {toggleItem}
                     isOpen = {openItemId === article.id}
+                    comments = {article.comments}
                 />
             </li>
         )
