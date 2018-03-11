@@ -13,8 +13,10 @@ export default (articlesState = defaultArticles, action) => {
 
     switch (type) {
         case ADD_COMMENT:
-            const comments = newArticles[payload.articleId].comments || [];
-            newArticles[payload.articleId].comments = [...comments, payload.id]
+            const newArticle = {...newArticles[payload.articleId]}
+            newArticle.comments = [...(newArticle.comments || []), payload.id];
+
+            newArticles[payload.articleId] = newArticle;
             return newArticles
 
         case DELETE_ARTICLE:
