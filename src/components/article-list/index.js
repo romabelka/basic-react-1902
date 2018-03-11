@@ -7,7 +7,7 @@ import { filtratedArticles } from '../../selectors'
 
 export class ArticleList extends Component {
     static propTypes = {
-        articles: PropTypes.array.isRequired,
+        articlesId: PropTypes.array.isRequired,
 
         //from accordion decorator
         openItemId: PropTypes.string,
@@ -19,14 +19,14 @@ export class ArticleList extends Component {
     }
 
     render() {
-        const { articles, openItemId, toggleItem } = this.props
+        const { articlesId, openItemId, toggleItem } = this.props
         console.log('---', 'rendering ArticlList')
-        const articleElements = articles.map(article =>
-            <li key = {article.id} className = "test__article-list--item">
+        const articleElements = articlesId.map(id =>
+            <li key = {id} className = "test__article-list--item">
                 <Article
-                    article = {article}
+                    id = {id}
                     onButtonClick = {toggleItem}
-                    isOpen = {openItemId === article.id}
+                    isOpen = {openItemId === id}
                 />
             </li>
         )
@@ -41,6 +41,6 @@ export class ArticleList extends Component {
 export default connect(state => {
     console.log('---', 'article list connect')
     return {
-        articles: filtratedArticles(state)
+        articlesId: filtratedArticles(state)
     }
 })(accordion(ArticleList))

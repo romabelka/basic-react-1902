@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
+import {changeUsername} from "../AC/index";
+import {connect} from "react-redux";
 
 class UserForm extends Component {
-    static propTypes = {
-
-    };
-
-    state = {
-        username: ''
-    }
 
     render() {
         return (
             <div>
-                username: <input value = {this.state.username} onChange = {this.handleChange}/>
+                username: <input value = {this.props.username} onChange = {this.handleChange}/>
             </div>
         )
     }
@@ -22,10 +17,12 @@ class UserForm extends Component {
             return
         }
 
-        this.setState({
-            username: ev.target.value
-        })
+        this.props.changeUsername(ev.target.value)
     }
 }
 
-export default UserForm
+const mapStateToProps = state => {
+    return {username:state.user.username}
+}
+
+export default connect(mapStateToProps,{changeUsername})(UserForm)

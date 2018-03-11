@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import CommentList from '../comment-list'
 import { deleteArticle } from '../../AC'
 import './style.css'
+import {createArticlesSelector} from "../../selectors/index";
 
 class Article extends PureComponent {
     state = {
@@ -58,7 +59,7 @@ function getBody(article) {
     return (
         <section className = "test__article--body">
             {article.text}
-            <CommentList comments={article.comments}/>
+            <CommentList articleId={article.id} comments={article.comments}/>
         </section>
     )
 }
@@ -73,4 +74,12 @@ Article.propTypes = {
     onButtonClick: PropTypes.func
 }
 
-export default connect(null, { deleteArticle })(Article)
+const createMapStateToProps = () => {
+    const articleSelector = createArticlesSelector()
+
+    return (state, ownProps) => ({
+        article: articleSelector(state, ownProps)
+    })
+}
+
+export default connect(createMapStateToProps, { deleteArticle })(Article)

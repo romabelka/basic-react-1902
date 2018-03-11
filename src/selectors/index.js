@@ -9,7 +9,8 @@ export const filtratedArticles = createSelector(articleListSelector, filtersSele
     const {selected, dateRange: {from, to}} = filters
     console.log('---', 'recomputing filtration')
 
-    return articles.filter(article => {
+    return Object.keys(articles).filter(id => {
+        const article = articles[id];
         const published = Date.parse(article.date)
         return (!selected.length || selected.includes(article.id)) &&
             (!from || !to || (published > from && published < to))
@@ -17,3 +18,4 @@ export const filtratedArticles = createSelector(articleListSelector, filtersSele
 })
 
 export const createCommentSelector = () => createSelector(commentsSelector, idSelector, (comments, id) => comments[id])
+export const createArticlesSelector = () => createSelector(articleListSelector, idSelector, (articles, id) => articles[id])
