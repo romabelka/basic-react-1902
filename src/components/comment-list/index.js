@@ -3,13 +3,15 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import toggleOpen from '../../decorators/toggleOpen'
+import { connect } from 'react-redux'
+import { addComment } from '../../AC'
 import './style.css'
 
 class CommentList extends Component {
     static defaultProps = {
         comments: []
     }
-
+addComment
     static propTypes = {
         comments: PropTypes.array.isRequired,
         //from toggleOpen decorator
@@ -51,6 +53,7 @@ class CommentList extends Component {
 
     getComments() {
         return (
+          <div>
             <ul>
                 {
                     this.props.comments.map(id =>
@@ -59,9 +62,17 @@ class CommentList extends Component {
                         </li>)
                 }
             </ul>
+            <button onClick = {this.handleAdd}>
+                add comment
+            </button>
+          </div>
         )
+    }
+    handleAdd = () => {
+        const { addComment, comment, user, articleId } = this.props
+        addComment('comment', 'user', articleId)
     }
 }
 
 
-export default toggleOpen(CommentList)
+export default connect(null, { addComment })(toggleOpen(CommentList))
