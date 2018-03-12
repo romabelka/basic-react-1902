@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import Article from '../article'
+import Loader from '../loader'
 import accordion from '../../decorators/accordion'
-import { filtratedArticles } from '../../selectors'
+import { filtratedArticles, loadingArticlesSelector } from '../../selectors'
+import { loadAllArticles } from '../../AC'
 
 export class ArticleList extends Component {
     static propTypes = {
         articles: PropTypes.array.isRequired,
+        loading: PropTypes.bool,
 
         //from accordion decorator
         openItemId: PropTypes.string,
@@ -15,12 +18,12 @@ export class ArticleList extends Component {
     };
 
     componentDidMount() {
-        this.props.fetchData && this.props.fetchData()
+        this.props.loadAllArticles()
     }
 
     render() {
-        const { articles, openItemId, toggleItem } = this.props
-        console.log('---', 'rendering ArticlList')
+        const { articles, openItemId, toggleItem, loading } = this.props
+        if (loading) return <Loader />
         const articleElements = articles.map(article =>
             <li key = {article.id} className = "test__article-list--item">
                 <Article
@@ -38,9 +41,7 @@ export class ArticleList extends Component {
     }
 }
 
-export default connect(state => {
-    console.log('---', 'article list connect')
-    return {
-        articles: filtratedArticles(state)
-    }
-})(accordion(ArticleList))
+export default connect(state => ({
+    articles: filtratedArticles(state),
+    loading: loadingArticlesSelector(state)
+}), { loadAllArticles })(accordion(ArticleList))
