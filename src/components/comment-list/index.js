@@ -1,9 +1,13 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import CommentForm from '../comment-form'
 import toggleOpen from '../../decorators/toggleOpen'
+import { loadCommentsByArticle } from '../../AC'
+import { createCommentSelector, loadingCommentsSelector } from '../../selectors'
+import Loader from '../loader'
 import './style.css'
 
 class CommentList extends Component {
@@ -16,6 +20,10 @@ class CommentList extends Component {
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+    componentWillReceiveProps({ isOpen }) {
+      if (!this.props.isOpen && isOpen) this.props.loadCommentsByArticle(this.props.article.id)
     }
 
     render() {
@@ -36,8 +44,11 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {article: { comments, id }, isOpen} = this.props
+        const {article: { comments, id }, isOpen, loading} = this.props
         if (!isOpen) return null
+        if (loading){
+          return <Loader/>
+        }
 
         return (
             <div className="test__comment-list--body">
@@ -65,5 +76,14 @@ class CommentList extends Component {
     }
 }
 
+const mapStateToProps = state => {
+  return {
+    loading: loadingCommentsSelector(state)
+  }
+}
 
-export default toggleOpen(CommentList)
+const mapDispatchToProps = {
+  loadCommentsByArticle
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(toggleOpen(CommentList))

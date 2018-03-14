@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createCommentSelector } from '../selectors'
 
-function Comment({comment}) {
+function Comment(props) {
+  const { comment } = props;
     return (
         <div>
             {comment.text} <b>by {comment.user}</b>
@@ -16,6 +17,10 @@ Comment.propTypes = {
         text: PropTypes.string.isRequired,
         user: PropTypes.string
     }).isRequired
+}
+
+Comment.defaultProps = {
+  comment: {},
 }
 
 const createMapStateToProps = () => {
