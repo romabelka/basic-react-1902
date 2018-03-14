@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Select from 'react-select'
 import { connect } from 'react-redux'
 import { changeSelection } from '../../AC'
+import { articleListSelector } from '../../selectors'
 
 import 'react-select/dist/react-select.css'
 
@@ -31,5 +32,10 @@ class SelectFilter extends Component {
 
 export default connect(state => ({
     selected: state.filters.selected,
+<<<<<<< HEAD
     articles: state.articles
 }), { changeSelection })(SelectFilter)
+=======
+    articles: articleListSelector(state)
+}), { changeSelection })(SelectFilter)
+>>>>>>> upstream/master
