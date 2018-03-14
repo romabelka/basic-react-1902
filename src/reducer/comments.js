@@ -1,8 +1,8 @@
-import { ADD_COMMENT } from '../constants'
-import {normalizedComments} from '../fixtures'
+import { ADD_COMMENT, LOAD_COMMENTS, START, SUCCESS, FAIL } from '../constants'
 import {arrToMap} from './utils'
+import { OrderedMap } from 'immutable'
 
-export default (state = arrToMap(normalizedComments), action) => {
+export default (state = new OrderedMap({}), action) => {
     const { type, payload, randomId } = action
 
     switch (type) {
@@ -11,6 +11,13 @@ export default (state = arrToMap(normalizedComments), action) => {
                 ...payload.comment,
                 id: randomId
             })
+
+        case LOAD_COMMENTS + SUCCESS:
+            const {response} = payload;
+            response.forEach((comment) => {
+                state = state.set(comment.id, { ...comment } )
+            });
+            return state;
 
         default:
             return state
