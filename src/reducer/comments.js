@@ -27,6 +27,7 @@ export default (comments = new ReducerState(), action) => {
             })
 
         case LOAD_ALL_COMMENTS + START:
+          if (comments.loaded) return comments
           return comments.set('loading', true)
 
         case LOAD_ALL_COMMENTS + SUCCESS:

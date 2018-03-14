@@ -6,6 +6,7 @@ export const loadingArticlesSelector = state => state.articles.loading
 
 const commentsMapSelector = state => state.comments.entities
 export const loadingCommentsSelector = state => state.comments.loading
+export const loadedCommentsSelector = state => state.comments.loaded
 
 
 const filtersSelector = state => state.filters

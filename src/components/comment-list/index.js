@@ -6,7 +6,7 @@ import Comment from '../comment'
 import CommentForm from '../comment-form'
 import toggleOpen from '../../decorators/toggleOpen'
 import { loadCommentsByArticle } from '../../AC'
-import { createCommentSelector, loadingCommentsSelector } from '../../selectors'
+import { createCommentSelector, loadingCommentsSelector, loadedCommentsSelector } from '../../selectors'
 import Loader from '../loader'
 import './style.css'
 
@@ -44,22 +44,25 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {article: { comments, id }, isOpen, loading} = this.props
+        const {article: { comments, id }, isOpen, loading, loaded} = this.props
         if (!isOpen) return null
         if (loading){
           return <Loader/>
         }
+        if (loaded) {
+          return (
+              <div className="test__comment-list--body">
+                  {
+                      comments.length
+                          ? this.getComments()
+                          : <h3 className="test__comment-list--empty">No comments yet</h3>
+                  }
+                  <CommentForm articleId = {id} />
+              </div>
+          )
+        }
 
-        return (
-            <div className="test__comment-list--body">
-                {
-                    comments.length
-                        ? this.getComments()
-                        : <h3 className="test__comment-list--empty">No comments yet</h3>
-                }
-                <CommentForm articleId = {id} />
-            </div>
-        )
+        return <h6>error</h6>
     }
 
     getComments() {
@@ -78,7 +81,8 @@ class CommentList extends Component {
 
 const mapStateToProps = state => {
   return {
-    loading: loadingCommentsSelector(state)
+    loading: loadingCommentsSelector(state),
+    loaded: loadedCommentsSelector(state)
   }
 }
 
