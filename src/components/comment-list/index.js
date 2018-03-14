@@ -2,11 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
-<<<<<<< HEAD
-import CommentAddForm from '../comment/comment-add'
-=======
 import CommentForm from '../comment-form'
->>>>>>> upstream/master
 import toggleOpen from '../../decorators/toggleOpen'
 import './style.css'
 
@@ -16,13 +12,7 @@ class CommentList extends Component {
     }
 
     static propTypes = {
-<<<<<<< HEAD
-        comments: PropTypes.array.isRequired,
-        articleId: PropTypes.string.isRequired,
-
-=======
         article: PropTypes.object.isRequired,
->>>>>>> upstream/master
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
@@ -48,12 +38,7 @@ class CommentList extends Component {
     }
 
     getBody() {
-<<<<<<< HEAD
-        const {comments, isOpen} = this.props
-
-=======
         const {article: { comments, id }, isOpen} = this.props
->>>>>>> upstream/master
         if (!isOpen) return null
 
         return (
@@ -63,11 +48,7 @@ class CommentList extends Component {
                         ? this.getComments()
                         : <h3 className="test__comment-list--empty">No comments yet</h3>
                 }
-<<<<<<< HEAD
-                <CommentAddForm articleId = {this.props.articleId} />
-=======
                 <CommentForm articleId = {id} />
->>>>>>> upstream/master
             </div>
         )
     }

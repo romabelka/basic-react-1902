@@ -32,10 +32,5 @@ class SelectFilter extends Component {
 
 export default connect(state => ({
     selected: state.filters.selected,
-<<<<<<< HEAD
-    articles: state.articles
-}), { changeSelection })(SelectFilter)
-=======
     articles: articleListSelector(state)
 }), { changeSelection })(SelectFilter)
->>>>>>> upstream/master

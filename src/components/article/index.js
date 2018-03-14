@@ -47,23 +47,12 @@ class Article extends PureComponent {
                     transitionAppearTimeout = {1000}
                     component = {Fragment}
                 >
-<<<<<<< HEAD
-                    {isOpen && this.getBody(article)}
-=======
                     {this.getBody()}
->>>>>>> upstream/master
                 </CSSTransition>
             </Fragment>
         )
     }
 
-<<<<<<< HEAD
-    getBody = (article) => {
-        return (
-            <section className = "test__article--body">
-                {article.text}
-                <CommentList articleId = {article.id} comments = {article.comments} />
-=======
     getBody() {
         const { article, isOpen } = this.props
         if (!isOpen) return null
@@ -73,7 +62,6 @@ class Article extends PureComponent {
             <section className = "test__article--body">
                 {article.text}
                 <CommentList article = {article}/>
->>>>>>> upstream/master
             </section>
         )
     }
@@ -84,10 +72,7 @@ class Article extends PureComponent {
     }
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> upstream/master
 Article.propTypes = {
     isOpen: PropTypes.bool,
     article: PropTypes.shape({
@@ -97,8 +82,4 @@ Article.propTypes = {
     onButtonClick: PropTypes.func
 }
 
-<<<<<<< HEAD
-export default connect(null, { deleteArticle })(Article)
-=======
 export default connect(null, { deleteArticle, loadArticleById })(Article)
->>>>>>> upstream/master

@@ -8,29 +8,18 @@ import { filtratedArticles, loadingArticlesSelector } from '../../selectors'
 import { loadAllArticles } from '../../AC'
 
 export class ArticleList extends Component {
-<<<<<<< HEAD
-  static propTypes = {
-    articles: PropTypes.array.isRequired,
-=======
     static propTypes = {
         articles: PropTypes.array.isRequired,
         loading: PropTypes.bool,
->>>>>>> upstream/master
 
     //from accordion decorator
     openItemId: PropTypes.string,
     toggleItem: PropTypes.func
   };
 
-<<<<<<< HEAD
-  componentDidMount() {
-    this.props.fetchData && this.props.fetchData()
-  }
-=======
     componentDidMount() {
         this.props.loadAllArticles()
     }
->>>>>>> upstream/master
 
     render() {
         const { articles, openItemId, toggleItem, loading } = this.props
@@ -52,16 +41,7 @@ export class ArticleList extends Component {
     }
 }
 
-<<<<<<< HEAD
-export default connect(state => {
-    console.log('---', 'article list connect')
-    return {
-        articles: filtratedArticles(state)
-    }
-})(accordion(ArticleList))
-=======
 export default connect(state => ({
     articles: filtratedArticles(state),
     loading: loadingArticlesSelector(state)
 }), { loadAllArticles })(accordion(ArticleList))
->>>>>>> upstream/master

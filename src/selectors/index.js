@@ -19,8 +19,4 @@ export const filtratedArticles = createSelector(articleListSelector, filtersSele
     })
 })
 
-<<<<<<< HEAD
-export const createCommentSelector = () => createSelector(commentsSelector, idSelector, (comments, id) => comments[id])
-=======
 export const createCommentSelector = () => createSelector(commentsSelector, idSelector, (comments, id) => comments.get(id))
->>>>>>> upstream/master

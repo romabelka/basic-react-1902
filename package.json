@@ -3,13 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-<<<<<<< HEAD
-=======
     "concurrently": "^3.5.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "immutable": "^4.0.0-rc.9",
->>>>>>> upstream/master
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-addons-css-transition-group": "^15.6.2",
@@ -19,11 +16,7 @@
     "react-scripts": "1.1.1",
     "react-select": "^1.2.1",
     "redux": "^3.7.2",
-<<<<<<< HEAD
-    "redux-devtools-extension": "^2.13.2",
-=======
     "redux-thunk": "^2.2.0",
->>>>>>> upstream/master
     "reselect": "^3.0.1"
   },
   "proxy": "http://localhost:3001/",
