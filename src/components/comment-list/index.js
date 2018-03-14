@@ -4,6 +4,9 @@ import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import CommentForm from '../comment-form'
 import toggleOpen from '../../decorators/toggleOpen'
+import { connect } from 'react-redux'
+import { loadCommentsByArticleId } from '../../AC'
+
 import './style.css'
 
 class CommentList extends Component {
@@ -16,6 +19,10 @@ class CommentList extends Component {
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+    componentWillReceiveProps({ isOpen, loadCommentsByArticleId, article }) {
+        if (!this.props.isOpen && isOpen) loadCommentsByArticleId(article.id)
     }
 
     render() {
@@ -66,4 +73,4 @@ class CommentList extends Component {
 }
 
 
-export default toggleOpen(CommentList)
+export default connect(null, { loadCommentsByArticleId })(toggleOpen(CommentList))
