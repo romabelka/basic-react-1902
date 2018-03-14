@@ -1,4 +1,4 @@
-import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL } from '../constants'
+import { LOAD_COMMENTS, DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL } from '../constants'
 import { arrToMap } from './utils'
 import { Record } from 'immutable'
 
@@ -8,7 +8,8 @@ const ArticleRecord = Record({
     text: null,
     date: null,
     loading: false,
-    comments: []
+    comments: [],
+    commentsLoaded:false
 })
 
 const ReducerState = Record({
@@ -45,7 +46,8 @@ export default (articles = new ReducerState(), action) => {
 
         case LOAD_ARTICLE + SUCCESS:
             return articles.setIn(['entities', payload.id], new ArticleRecord(payload.response))
-
+        case LOAD_COMMENTS + SUCCESS:
+            return articles.setIn(['entities',payload.id,'commentsLoaded'],true)
 
         default:
             return articles
