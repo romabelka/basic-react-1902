@@ -3,8 +3,12 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import CommentForm from '../comment-form'
+import Loader from '../loader'
 import toggleOpen from '../../decorators/toggleOpen'
 import './style.css'
+
+import { connect } from 'react-redux'
+import { loadCommentsById } from '../../AC'
 
 class CommentList extends Component {
     static defaultProps = {
@@ -13,9 +17,14 @@ class CommentList extends Component {
 
     static propTypes = {
         article: PropTypes.object.isRequired,
-        //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+
+    componentWillReceiveProps({ isOpen, loadCommentsById, article}) {
+        if (!this.props.isOpen && isOpen && !this.props.loaded)
+          loadCommentsById(article.id)
     }
 
     render() {
@@ -52,12 +61,14 @@ class CommentList extends Component {
     }
 
     getComments() {
+        if (this.props.loading) return  <Loader/>
+
         return (
             <ul>
                 {
-                    this.props.article.comments.map(id =>
-                        <li key = {id} className = "test__comment-list--item">
-                            <Comment id = {id}/>
+                    this.props.comments.map(comment =>
+                        <li key = {comment.id} className = "test__comment-list--item">
+                            <Comment comment = {comment}/>
                         </li>)
                 }
             </ul>
@@ -65,5 +76,10 @@ class CommentList extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    comments: state.comments.get('entities'),
+    loading: state.comments.get('loading'),
+    loaded: state.comments.get('loaded')
+})
 
-export default toggleOpen(CommentList)
+export default connect(mapStateToProps, { loadCommentsById })(toggleOpen(CommentList))
