@@ -76,9 +76,9 @@ export function loadArticleById(id) {
     }
 }
 
-export function loadComments(id) {
+export function loadCommentsByArticleId(id) {
     return {
         type: LOAD_COMMENTS,
-        callAPI: '/api/comment?article=${id}'
+        callAPI: `/api/comment?article=${id}`
     }
 }
