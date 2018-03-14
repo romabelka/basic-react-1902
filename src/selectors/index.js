@@ -12,7 +12,7 @@ export const filtratedArticles = createSelector(articleListSelector, filtersSele
     const {selected, dateRange: {from, to}} = filters
     console.log('---', 'recomputing filtration')
 
-    return articles.filter(article => {
+    return Object.values(articles).filter(article => {
         const published = Date.parse(article.date)
         return (!selected.length || selected.includes(article.id)) &&
             (!from || !to || (published > from && published < to))

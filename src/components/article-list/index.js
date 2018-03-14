@@ -12,10 +12,10 @@ export class ArticleList extends Component {
         articles: PropTypes.array.isRequired,
         loading: PropTypes.bool,
 
-        //from accordion decorator
-        openItemId: PropTypes.string,
-        toggleItem: PropTypes.func
-    };
+    //from accordion decorator
+    openItemId: PropTypes.string,
+    toggleItem: PropTypes.func
+  };
 
     componentDidMount() {
         this.props.loadAllArticles()

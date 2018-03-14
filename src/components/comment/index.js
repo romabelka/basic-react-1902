@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { createCommentSelector } from '../selectors'
+import { createCommentSelector } from '../../selectors'
 
 function Comment({comment}) {
     return (
@@ -13,14 +13,14 @@ function Comment({comment}) {
 
 Comment.propTypes = {
     comment: PropTypes.shape({
-        text: PropTypes.string.isRequired,
-        user: PropTypes.string
+      id: "",
+      text: PropTypes.string.isRequired,
+      user: PropTypes.string
     }).isRequired
 }
 
 const createMapStateToProps = () => {
     const commentSelector = createCommentSelector()
-
     return (state, ownProps) => ({
         comment: commentSelector(state, ownProps)
     })
