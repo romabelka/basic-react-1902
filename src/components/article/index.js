@@ -4,7 +4,8 @@ import CSSTransition from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 import CommentList from '../comment-list'
 import Loader from '../loader'
-import { deleteArticle, loadArticleById } from '../../AC'
+import { deleteArticle, loadArticleById, loadCommenstById } from '../../AC'
+import { createCommentSelector } from '../../selectors'
 import './style.css'
 
 class Article extends PureComponent {
@@ -54,14 +55,18 @@ class Article extends PureComponent {
     }
 
     getBody() {
-        const { article, isOpen } = this.props
+        const { comments, isOpen, article, loadAllArticles, loadCommenstById } = this.props
+
         if (!isOpen) return null
         if (article.loading) return <Loader/>
 
         return (
             <section className = "test__article--body">
                 {article.text}
-                <CommentList article = {article}/>
+                <CommentList
+                    comments = {comments}
+                    loadCommenstById = {loadCommenstById}
+                    article = {article}/>
             </section>
         )
     }
@@ -82,4 +87,12 @@ Article.propTypes = {
     onButtonClick: PropTypes.func
 }
 
-export default connect(null, { deleteArticle, loadArticleById })(Article)
+const createMapStateToProps = () => {
+    const commentSelector = createCommentSelector()
+
+    return (state, ownProps) => ({
+        comments: commentSelector(state, ownProps)
+    })
+}
+
+export default connect(createMapStateToProps, { deleteArticle, loadArticleById, loadCommenstById })(Article)
