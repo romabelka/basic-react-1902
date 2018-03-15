@@ -9,17 +9,18 @@ class ArticlesRoute extends Component {
     };
 
     render() {
-        console.log('---', this.props.match)
         return (
             <div>
                 <h2>Articles page</h2>
                 <ArticleList />
-                <Route path = "/articles/:id" render = {this.getArticle}/>
+                <Route path = {`${this.props.match.path}/:id`} children = {this.getArticle}/>
             </div>
         )
     }
 
     getArticle = ({ match }) => {
+        if (!match) return <h2>Please select an article</h2>
+
         return <Article id = {match.params.id} key = {match.params.id} isOpen />
     }
 }

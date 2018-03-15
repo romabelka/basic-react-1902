@@ -80,7 +80,7 @@ class Article extends PureComponent {
 Article.propTypes = {
     isOpen: PropTypes.bool,
     article: PropTypes.shape({
-        title: PropTypes.string.isRequired,
+        title: PropTypes.string,
         text: PropTypes.string
     }),
     onButtonClick: PropTypes.func
