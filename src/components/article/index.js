@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import CommentList from '../comment-list'
 import Loader from '../loader'
 import { deleteArticle, loadArticleById } from '../../AC'
+import { articleSelector } from '../../selectors'
 import './style.css'
 
 class Article extends PureComponent {
@@ -17,14 +18,17 @@ class Article extends PureComponent {
         this.setState({ error })
     }
 
-    componentWillReceiveProps({ isOpen, loadArticleById, article }) {
-        if (!this.props.isOpen && isOpen && !article.text) loadArticleById(article.id)
+    componentDidMount() {
+        const { loadArticleById, article, id } = this.props
+        if (!article || (!article.text && !article.loading)) loadArticleById(id)
     }
 
     render() {
         if (this.state.error) return <h2>{this.state.error.message}</h2>
 
         const { isOpen, article, onButtonClick } = this.props
+        if (!article) return null
+
         return (
             <Fragment>
                 <h2>
@@ -78,8 +82,10 @@ Article.propTypes = {
     article: PropTypes.shape({
         title: PropTypes.string.isRequired,
         text: PropTypes.string
-    }).isRequired,
+    }),
     onButtonClick: PropTypes.func
 }
 
-export default connect(null, { deleteArticle, loadArticleById })(Article)
+export default connect((state, props) => ({
+    article: articleSelector(state, props)
+}), { deleteArticle, loadArticleById })(Article)
