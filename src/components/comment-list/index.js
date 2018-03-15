@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
+import {connect} from 'react-redux'
 import Comment from '../comment'
 import CommentForm from '../comment-form'
+import Loader from '../loader'
 import toggleOpen from '../../decorators/toggleOpen'
+import {loadArticleComments} from '../../AC'
 import './style.css'
 
 class CommentList extends Component {
@@ -16,6 +19,12 @@ class CommentList extends Component {
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+    componentWillReceiveProps({ isOpen, article, loadArticleComments }) {
+        if (!this.props.isOpen && isOpen && !article.commentsLoading && !article.commentsLoaded) {
+            loadArticleComments(article.id)
+        }
     }
 
     render() {
@@ -36,8 +45,10 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {article: { comments, id }, isOpen} = this.props
+        const {article: { comments, id, commentsLoading, commentsLoaded }, isOpen} = this.props
         if (!isOpen) return null
+        if (commentsLoading) return <Loader />
+        if (!commentsLoaded) return null
 
         return (
             <div className="test__comment-list--body">
@@ -66,4 +77,4 @@ class CommentList extends Component {
 }
 
 
-export default toggleOpen(CommentList)
+export default connect(null, { loadArticleComments })(toggleOpen(CommentList))
