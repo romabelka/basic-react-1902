@@ -4,18 +4,20 @@ import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import CommentForm from '../comment-form'
 import toggleOpen from '../../decorators/toggleOpen'
+import Loader from '../loader'
 import './style.css'
 
 class CommentList extends Component {
-    static defaultProps = {
-        comments: []
-    }
 
     static propTypes = {
         article: PropTypes.object.isRequired,
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+    componentWillReceiveProps({isOpen, comments, article: {id}}) {
+        if (!this.props.isOpen && isOpen && !comments) this.props.loadCommenstById(id)
     }
 
     render() {
@@ -36,13 +38,14 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {article: { comments, id }, isOpen} = this.props
-        if (!isOpen) return null
+        const {article: {id}, isOpen, comments} = this.props
+        if (!isOpen || !comments) return null
+        if (comments && comments.get('loading')) return <Loader/>
 
         return (
             <div className="test__comment-list--body">
                 {
-                    comments.length
+                    comments.get('articleComments')
                         ? this.getComments()
                         : <h3 className="test__comment-list--empty">No comments yet</h3>
                 }
@@ -55,10 +58,11 @@ class CommentList extends Component {
         return (
             <ul>
                 {
-                    this.props.article.comments.map(id =>
-                        <li key = {id} className = "test__comment-list--item">
-                            <Comment id = {id}/>
-                        </li>)
+                    this.props.comments.get('articleComments').toJS().map(comment => (
+                        <li key = {comment.id} className = "test__comment-list--item">
+                            <Comment comment = {comment}/>
+                        </li>
+                    ))
                 }
             </ul>
         )

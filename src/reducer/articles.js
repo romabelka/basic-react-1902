@@ -7,8 +7,7 @@ const ArticleRecord = Record({
     title: null,
     text: null,
     date: null,
-    loading: false,
-    comments: []
+    loading: false
 })
 
 const ReducerState = Record({
