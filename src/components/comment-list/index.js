@@ -4,6 +4,10 @@ import CSSTransition from 'react-addons-css-transition-group'
 import Comment from '../comment'
 import CommentForm from '../comment-form'
 import toggleOpen from '../../decorators/toggleOpen'
+import {loadingCommentsSelect, loadedCommentsSelect} from '../../selectors'
+import {connect} from 'react-redux'
+import {loadCommentsByArticleId} from '../../AC'
+import Loader from '../loader'
 import './style.css'
 
 class CommentList extends Component {
@@ -16,6 +20,10 @@ class CommentList extends Component {
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+    componentWillReceiveProps({isOpen, loadCommentsByArticleId, article}){
+        if (!this.props.isOpen && isOpen && !article.commentsLoaded) loadCommentsByArticleId(article.id)
     }
 
     render() {
@@ -36,19 +44,21 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {article: { comments, id }, isOpen} = this.props
+        const {article: { comments, id, commentsLoaded }, isOpen, loading, loaded} = this.props
         if (!isOpen) return null
-
-        return (
-            <div className="test__comment-list--body">
-                {
-                    comments.length
-                        ? this.getComments()
-                        : <h3 className="test__comment-list--empty">No comments yet</h3>
-                }
-                <CommentForm articleId = {id} />
-            </div>
-        )
+        if (loading) return <Loader />
+        if (commentsLoaded){
+            return (
+                <div className="test__comment-list--body">
+                    {
+                        comments.length
+                            ? this.getComments()
+                            : <h3 className="test__comment-list--empty">No comments yet</h3>
+                    }
+                    <CommentForm articleId = {id} />
+                </div>
+            )
+        }
     }
 
     getComments() {
@@ -66,4 +76,7 @@ class CommentList extends Component {
 }
 
 
-export default toggleOpen(CommentList)
+export default connect(state => ({
+    loading: loadingCommentsSelect(state),
+    loaded: loadedCommentsSelect(state)
+}), {loadCommentsByArticleId})(toggleOpen(CommentList))
