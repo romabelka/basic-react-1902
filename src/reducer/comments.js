@@ -11,6 +11,7 @@ const CommentRecord = Record({
 const ReducerState = Record({
     entities: new OrderedMap({}),
     loadedIds: [],
+    total: null
 })
 
 export default (state = new ReducerState(), action) => {
@@ -30,6 +31,7 @@ export default (state = new ReducerState(), action) => {
             const ids = response.records.map(comment => comment.id)
             return state.mergeIn(['entities'], arrToMap(response.records, CommentRecord))
                 .mergeIn(['loadedIds'], ids)
+                .updateIn(['total'], value => response.total === value ? value : response.total )
 
         default:
             return state
