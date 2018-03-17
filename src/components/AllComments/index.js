@@ -8,17 +8,26 @@ import { allCommentsSelector, totalComments } from '../../selectors'
 
 class AllComments extends React.Component {
   componentWillMount() {
-    this.props.loadAllcomments(this.props.match.params.count, 4)
+    this.props.loadAllcomments(this.props.match.params.count, 0)
   }
 
-  renderButtons = total => {
-    const count = new Array(Math.ceil(total / 5)).fill(null)
+  handlePageButton = () => {
+    this.props.loadAllcomments(this.props.match.params.count, this.props.comments.length)
+  }
+
+  renderButtons = (total, pages) => {
+    const count = new Array(Math.ceil(total / pages)).fill(null)
     return count.map((_, index) => (
-      <button>{index + 1}</button>))
+      <button
+        key={`button-page-${index + 1}`}
+        onClick={this.handlePageButton}
+      >
+        {index + 1}
+      </button>))
   }
 
   render() {
-    const { comments, total } = this.props
+    const { comments, total, count } = this.props
     return(
       <div>
         <h1>{this.props.match.params.count}</h1>
@@ -30,7 +39,7 @@ class AllComments extends React.Component {
               </li>)
           }
         </ul>
-        {this.renderButtons(total)}
+        {this.renderButtons(total, count)}
       </div>
     )
   }
@@ -38,17 +47,19 @@ class AllComments extends React.Component {
 
 AllComments.propTypes = {
   match: PropTypes.object,
-  comments: PropTypes.array
+  comments: PropTypes.array,
+  count: PropTypes.string
 }
 
 AllComments.defaultProps = {
   comments: []
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
     comments: allCommentsSelector(state),
-    total: totalComments(state)
+    total: totalComments(state),
+    count: ownProps.match.params.count
   }
 }
 
