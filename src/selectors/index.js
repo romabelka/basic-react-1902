@@ -25,3 +25,6 @@ export const articleSelector = createSelector(articlesMapSelector, idSelector, (
 export const createCommentSelector = () => createSelector(commentsSelector, idSelector, (comments, id) => comments.get(id))
 
 export const allCommentsSelector = state => state.comments.loadedIds
+
+const totalCommentsSelector = state => state.comments.total
+export const totalComments = createSelector(totalCommentsSelector, total => total)

@@ -4,15 +4,21 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Comment from '../comment'
 import { loadAllcomments } from '../../AC'
-import { allCommentsSelector } from '../../selectors'
+import { allCommentsSelector, totalComments } from '../../selectors'
 
 class AllComments extends React.Component {
   componentWillMount() {
     this.props.loadAllcomments(this.props.match.params.count, 4)
   }
 
+  renderButtons = total => {
+    const count = new Array(Math.ceil(total / 5)).fill(null)
+    return count.map((_, index) => (
+      <button>{index + 1}</button>))
+  }
+
   render() {
-    const { comments } = this.props
+    const { comments, total } = this.props
     return(
       <div>
         <h1>{this.props.match.params.count}</h1>
@@ -24,6 +30,7 @@ class AllComments extends React.Component {
               </li>)
           }
         </ul>
+        {this.renderButtons(total)}
       </div>
     )
   }
@@ -40,7 +47,8 @@ AllComments.defaultProps = {
 
 const mapStateToProps = state => {
   return {
-    comments: allCommentsSelector(state)
+    comments: allCommentsSelector(state),
+    total: totalComments(state)
   }
 }
 
