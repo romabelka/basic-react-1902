@@ -1,6 +1,7 @@
 import {
     INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE,
-    LOAD_ARTICLE_COMMENTS, START, SUCCESS, FAIL
+    LOAD_ARTICLE_COMMENTS, LOAD_ALL_COMMENTS, LOAD_PAGE_COMMENTS,
+    START, SUCCESS, FAIL, PER_PAGE
 } from '../constants'
 
 export function increment() {
@@ -81,5 +82,22 @@ export function loadArticleComments(articleId) {
         type: LOAD_ARTICLE_COMMENTS,
         payload: { articleId },
         callAPI: `/api/comment?article=${articleId}`
+    }
+}
+
+export function loadAllComments() {
+    return {
+        type: LOAD_ALL_COMMENTS,
+        payload: {},
+        callAPI: `/api/comment`
+    }
+}
+
+export function loadPageComments(no) {
+    const limit = PER_PAGE, offset = (no-1)*limit;
+    return {
+        type: LOAD_PAGE_COMMENTS,
+        payload: {no},
+        callAPI: `/api/comment?limit=${limit}&offset=${offset}`
     }
 }
