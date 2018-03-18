@@ -5,7 +5,14 @@ export const articleListSelector = createSelector(articlesMapSelector, articlesM
 export const loadingArticlesSelector = state => state.articles.loading
 export const loadedArticlesSelector = state => state.articles.loaded
 
-const commentsSelector = state => state.comments.entities
+export const commentPagesSelector = state => state.comments.pages
+
+export const commentsSelector = state => state.comments.entities
+export const commentsMapSelector = state => state.comments.entities
+export const commentsListSelector = createSelector(commentsMapSelector, commentsMap => commentsMap.valueSeq().toArray())
+export const commentsTotalSelector = state => state.comments.total
+
+
 const filtersSelector = state => state.filters
 const idSelector = (_, props) => props.id
 
