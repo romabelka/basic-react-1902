@@ -10,7 +10,7 @@ import { allCommentsSelector, totalComments } from '../../selectors'
 class AllComments extends React.Component {
 
   componentDidMount() {
-    this.props.loadAllcomments(0, 1)
+    this.props.loadAllcomments(0, "1")
   }
 
   renderButtons = total => {
