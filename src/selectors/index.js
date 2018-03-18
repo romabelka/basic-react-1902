@@ -23,3 +23,12 @@ export const filtratedArticles = createSelector(articleListSelector, filtersSele
 export const articleSelector = createSelector(articlesMapSelector, idSelector, (articles, id) => articles.get(id))
 
 export const createCommentSelector = () => createSelector(commentsSelector, idSelector, (comments, id) => comments.get(id))
+
+const allCommentsSelector = state => state.comments.loadedPages.toJS()
+const getPage = (_, props) => props.page
+export const commentsByPage = createSelector(allCommentsSelector, getPage, (comments, page) => comments[page])
+
+const totalCommentsSelector = state => state.comments.total
+export const totalComments = createSelector(totalCommentsSelector, total => total)
+
+export const commentsLoading = state => state.comments.loading

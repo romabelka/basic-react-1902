@@ -5,6 +5,7 @@ import ArticlesPage from './components/routes/articles'
 import UserForm from './components/user-form'
 import Filters from './components/filters'
 import Counter from './components/counter'
+import AllComments from './components/AllComments'
 import 'react-select/dist/react-select.css'
 
 class App extends Component {
@@ -19,8 +20,10 @@ class App extends Component {
                     <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>counter</NavLink></li>
                     <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>filters</NavLink></li>
                     <li><NavLink to = "/articles" activeStyle = {{ color: 'red' }}>articles</NavLink></li>
+                    <li><NavLink to = "/comments" activeStyle = {{ color: 'red' }}>comments</NavLink></li>
                 </ul>
                 <Switch>
+                    <Route path = "/comments" component = {AllComments} />
                     <Route path = "/counter" component = {Counter} exact />
                     <Route path = "/filters" component = {Filters} />
                     <Route path = "/articles/new" render = {() => <h1>New Article Form</h1>} />
