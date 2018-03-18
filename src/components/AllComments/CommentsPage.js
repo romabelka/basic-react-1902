@@ -36,6 +36,8 @@ class CommentsPage extends React.Component {
 
 CommentsPage.propTypes = {
   comments: PropTypes.array,
+  loading: PropTypes.bool,
+  loadAllcomments: PropTypes.fun
 }
 
 CommentsPage.defaultProps = {

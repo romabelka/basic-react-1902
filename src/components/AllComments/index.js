@@ -9,7 +9,7 @@ import { allCommentsSelector, totalComments } from '../../selectors'
 
 class AllComments extends React.Component {
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadAllcomments(0, 1)
   }
 
@@ -34,7 +34,7 @@ class AllComments extends React.Component {
 
   getCommentsPage = ({ match }) => {
     if (!match) {
-      return <CommentsPage page={1} />
+      return <CommentsPage page={"1"} />
     }
     return <CommentsPage page={match.params.page} />
   }
