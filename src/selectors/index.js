@@ -30,3 +30,5 @@ export const commentsByPage = createSelector(allCommentsSelector, getPage, (comm
 
 const totalCommentsSelector = state => state.comments.total
 export const totalComments = createSelector(totalCommentsSelector, total => total)
+
+export const commentsLoading = state => state.comments.loading

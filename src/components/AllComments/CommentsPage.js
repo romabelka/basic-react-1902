@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Comment from '../comment'
-import { commentsByPage } from '../../selectors'
+import { commentsByPage, commentsLoading } from '../../selectors'
 import { loadAllcomments } from '../../AC'
+import Loader from '../loader'
 
 class CommentsPage extends React.Component {
 
@@ -15,16 +16,20 @@ class CommentsPage extends React.Component {
   }
 
   render() {
-    const { comments } = this.props
+    const { comments, loading } = this.props
     return(
-      <ul>
-        {
-          comments.map(id =>
-            <li key = {id} className = "test__comment-list--item">
-                <Comment id = {id}/>
-            </li>)
+      <div>
+        {loading ? <Loader/> :
+          <ul>
+            {
+              comments.map(id =>
+                <li key = {id} className = "test__comment-list--item">
+                    <Comment id = {id}/>
+                </li>)
+            }
+          </ul>
         }
-      </ul>
+      </div>
     )
   }
 }
@@ -40,6 +45,7 @@ CommentsPage.defaultProps = {
 const mapStateToProps = (state, ownProps) => {
   return {
     comments: commentsByPage(state, ownProps),
+    loading: commentsLoading(state)
   }
 }
 
