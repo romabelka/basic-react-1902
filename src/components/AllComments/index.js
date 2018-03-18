@@ -1,65 +1,53 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Route } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Comment from '../comment'
+import CommentsPage from './CommentsPage'
 import { loadAllcomments } from '../../AC'
 import { allCommentsSelector, totalComments } from '../../selectors'
 
 class AllComments extends React.Component {
+
   componentWillMount() {
-    this.props.loadAllcomments(this.props.match.params.count, 0)
+    this.props.loadAllcomments(0, 1)
   }
 
-  handlePageButton = () => {
-    this.props.loadAllcomments(this.props.match.params.count, this.props.comments.length)
-  }
-
-  renderButtons = (total, pages) => {
-    const count = new Array(Math.ceil(total / pages)).fill(null)
+  renderButtons = total => {
+    const count = new Array(Math.ceil(total / 5)).fill(null)
     return count.map((_, index) => (
-      <button
-        key={`button-page-${index + 1}`}
-        onClick={this.handlePageButton}
-      >
-        {index + 1}
-      </button>))
+      <NavLink to={`/comments/${index + 1}`} key={`button-page-${index + 1}`} >
+        <button>{index + 1}</button>
+      </NavLink>
+      ))
   }
 
   render() {
-    const { comments, total, count } = this.props
+    const { total, match } = this.props
     return(
       <div>
-        <h1>{this.props.match.params.count}</h1>
-        <ul>
-          {
-            comments.map(id =>
-              <li key = {id} className = "test__comment-list--item">
-                  <Comment id = {id}/>
-              </li>)
-          }
-        </ul>
-        {this.renderButtons(total, count)}
+        <Route path = {`${match.path}/:page`} children = {this.getCommentsPage}/>
+        {this.renderButtons(total)}
       </div>
     )
+  }
+
+  getCommentsPage = ({ match }) => {
+    if (!match) {
+      return <CommentsPage page={1} />
+    }
+    return <CommentsPage page={match.params.page} />
   }
 }
 
 AllComments.propTypes = {
   match: PropTypes.object,
-  comments: PropTypes.array,
-  count: PropTypes.string
-}
-
-AllComments.defaultProps = {
-  comments: []
+  total: PropTypes.number
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    comments: allCommentsSelector(state),
     total: totalComments(state),
-    count: ownProps.match.params.count
   }
 }
 

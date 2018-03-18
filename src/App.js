@@ -20,10 +20,10 @@ class App extends Component {
                     <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>counter</NavLink></li>
                     <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>filters</NavLink></li>
                     <li><NavLink to = "/articles" activeStyle = {{ color: 'red' }}>articles</NavLink></li>
-                    <li><NavLink to = "/comments/5" activeStyle = {{ color: 'red' }}>comments</NavLink></li>
+                    <li><NavLink to = "/comments" activeStyle = {{ color: 'red' }}>comments</NavLink></li>
                 </ul>
                 <Switch>
-                    <Route path = "/comments/:count" component = {AllComments} />
+                    <Route path = "/comments" component = {AllComments} />
                     <Route path = "/counter" component = {Counter} exact />
                     <Route path = "/filters" component = {Filters} />
                     <Route path = "/articles/new" render = {() => <h1>New Article Form</h1>} />

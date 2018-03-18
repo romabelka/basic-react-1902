@@ -84,10 +84,10 @@ export function loadArticleComments(articleId) {
     }
 }
 
-export function loadAllcomments(limit, offset) {
+export function loadAllcomments(offset, page) {
   return {
     type: LOAD_ALL_COMMENTS,
-    payload: { limit, offset },
-    callAPI: `/api/comment?limit=${limit}&offset=${offset}`
+    payload: { offset, page },
+    callAPI: `/api/comment?limit=5&offset=${offset}`
   }
 }

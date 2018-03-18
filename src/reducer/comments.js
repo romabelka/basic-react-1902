@@ -10,7 +10,7 @@ const CommentRecord = Record({
 
 const ReducerState = Record({
     entities: new OrderedMap({}),
-    loadedIds: [],
+    loadedPages: new OrderedMap({}),
     total: null
 })
 
@@ -30,7 +30,7 @@ export default (state = new ReducerState(), action) => {
         case LOAD_ALL_COMMENTS + SUCCESS:
             const ids = response.records.map(comment => comment.id)
             return state.mergeIn(['entities'], arrToMap(response.records, CommentRecord))
-                .mergeIn(['loadedIds'], ids)
+                .mergeIn(['loadedPages'], new OrderedMap({[payload.page]: ids}))
                 .updateIn(['total'], value => response.total === value ? value : response.total )
 
         default:
