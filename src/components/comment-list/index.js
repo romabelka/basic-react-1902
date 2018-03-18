@@ -63,12 +63,14 @@ class CommentList extends Component {
     }
 
     getComments() {
+        const {comments} = this.props;
+
         return (
             <ul>
                 {
                     this.props.article.comments.map(id =>
                         <li key = {id} className = "test__comment-list--item">
-                            <Comment id = {id}/>
+                            <Comment id = {id} comment={comments.get(id)}/>
                         </li>)
                 }
             </ul>
@@ -77,4 +79,6 @@ class CommentList extends Component {
 }
 
 
-export default connect(null, { loadArticleComments })(toggleOpen(CommentList))
+export default connect(state => ({
+        comments: state.comments.entities
+    }), { loadArticleComments })(toggleOpen(CommentList))
