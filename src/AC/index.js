@@ -85,9 +85,26 @@ export function loadArticleComments(articleId) {
 }
 
 export function loadAllcomments(offset, page) {
-  return {
-    type: LOAD_ALL_COMMENTS,
-    payload: { offset, page },
-    callAPI: `/api/comment?limit=5&offset=${offset}`
+  return (dispatch, getState) => {
+    const pageLoaded = getState().comments.loadedPages.has(page)
+    if (!pageLoaded) {
+      dispatch({
+        type: LOAD_ALL_COMMENTS + START,
+      })
+
+      setTimeout(() => {
+          fetch(`/api/comment?limit=5&offset=${offset}`)
+              .then(res => res.json())
+              .then(response => dispatch({
+                  type: LOAD_ALL_COMMENTS + SUCCESS,
+                  payload: { page },
+                  response
+              }))
+              .catch(error => dispatch({
+                  type: LOAD_ALL_COMMENTS + FAIL,
+                  payload: { page, error }
+              }))
+      }, 1000)
+    }
   }
 }

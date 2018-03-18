@@ -8,7 +8,7 @@ export default store => next => action => {
         type: type + START,
         ...rest
     })
-
+    
     //REMOVE THIS!
     setTimeout(() => {
         fetch(callAPI)
