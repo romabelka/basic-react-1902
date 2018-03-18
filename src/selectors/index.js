@@ -8,6 +8,7 @@ export const loadedArticlesSelector = state => state.articles.loaded
 const commentsSelector = state => state.comments.entities
 const filtersSelector = state => state.filters
 const idSelector = (_, props) => props.id
+export const commentListSelector = state => state.comments.get('loadedComments')
 
 export const filtratedArticles = createSelector(articleListSelector, filtersSelector, (articles, filters) => {
     const {selected, dateRange: {from, to}} = filters
