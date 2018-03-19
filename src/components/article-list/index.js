@@ -41,5 +41,6 @@ export class ArticleList extends Component {
 export default connect(state => ({
     articles: filtratedArticles(state),
     loading: loadingArticlesSelector(state),
-    loaded: loadedArticlesSelector(state)
+    loaded: loadedArticlesSelector(state),
+    router: state.router
 }), { loadAllArticles })(accordion(ArticleList))

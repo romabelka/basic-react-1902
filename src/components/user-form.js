@@ -5,14 +5,10 @@ class UserForm extends Component {
 
     };
 
-    state = {
-        username: ''
-    }
-
     render() {
         return (
             <div>
-                username: <input value = {this.state.username} onChange = {this.handleChange}/>
+                username: <input value = {this.props.value} onChange = {this.handleChange}/>
             </div>
         )
     }
@@ -22,9 +18,7 @@ class UserForm extends Component {
             return
         }
 
-        this.setState({
-            username: ev.target.value
-        })
+        this.props.onChange(ev.target.value)
     }
 }
 

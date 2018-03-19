@@ -1,4 +1,4 @@
-import React, {PureComponent, Fragment} from 'react'
+import React, {Component, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
@@ -8,7 +8,7 @@ import { deleteArticle, loadArticleById } from '../../AC'
 import { articleSelector } from '../../selectors'
 import './style.css'
 
-class Article extends PureComponent {
+class Article extends Component {
     state = {
         error: null
     }
@@ -24,6 +24,7 @@ class Article extends PureComponent {
     }
 
     render() {
+        console.log('---', 'rendering Article')
         if (this.state.error) return <h2>{this.state.error.message}</h2>
 
         const { isOpen, article, onButtonClick } = this.props
@@ -88,4 +89,4 @@ Article.propTypes = {
 
 export default connect((state, props) => ({
     article: articleSelector(state, props)
-}), { deleteArticle, loadArticleById })(Article)
+}), { deleteArticle, loadArticleById }, null, { pure: false })(Article)

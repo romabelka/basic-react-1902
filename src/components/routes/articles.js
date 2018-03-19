@@ -9,6 +9,7 @@ class ArticlesRoute extends Component {
     };
 
     render() {
+        console.log('---', 'rendering Articles Page')
         return (
             <div>
                 <h2>Articles page</h2>

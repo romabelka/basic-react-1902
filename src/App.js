@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {findDOMNode} from 'react-dom'
 import {Route, NavLink, Switch, Redirect} from 'react-router-dom'
 import ArticlesPage from './components/routes/articles'
@@ -12,10 +13,25 @@ class App extends Component {
     static propTypes = {
     };
 
+    static childContextTypes = {
+        user: PropTypes.string
+    }
+
+    state = {
+        username: ''
+    }
+
+    getChildContext() {
+        return {
+            user: this.state.username
+        }
+    }
+
     render() {
+        console.log('---', 'rendering App')
         return (
             <div>
-                <UserForm />
+                <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
                 <ul>
                     <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>counter</NavLink></li>
                     <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>filters</NavLink></li>
@@ -35,6 +51,8 @@ class App extends Component {
             </div>
         )
     }
+
+    handleUserChange = username => this.setState({ username })
 }
 
 export default App
