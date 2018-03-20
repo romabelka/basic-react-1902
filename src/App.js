@@ -6,6 +6,7 @@ import ArticlesPage from './components/routes/articles'
 import UserForm from './components/user-form'
 import Filters from './components/filters'
 import Counter from './components/counter'
+import LangProvider from './provider/LangProvider'
 import 'react-select/dist/react-select.css'
 import CommentsPage from './components/routes/comments-page'
 
@@ -18,7 +19,8 @@ class App extends Component {
     }
 
     state = {
-        username: ''
+        username: '',
+        language: 'ru'
     }
 
     getChildContext() {
@@ -27,10 +29,19 @@ class App extends Component {
         }
     }
 
+    changeLanguage = (language) => (ev) => {
+        this.setState({language})
+        ev.preventDefault()
+    }
+
+    handleUserChange = username => this.setState({ username })
+
     render() {
-        console.log('---', 'rendering App')
         return (
-            <div>
+            <LangProvider language = {this.state.language}>
+                <a href="#" onClick={this.changeLanguage('ru')}>Rus</a>
+                <br />
+                <a href="#" onClick={this.changeLanguage('en')}>Eng</a>
                 <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
                 <ul>
                     <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>counter</NavLink></li>
@@ -48,11 +59,10 @@ class App extends Component {
                     <Route path = "/error" render = {() => <h1>Error page</h1>} />
                     <Route path = "*" render = {() => <h1>Not Found Page</h1>} />
                 </Switch>
-            </div>
+            </LangProvider>
         )
     }
 
-    handleUserChange = username => this.setState({ username })
 }
 
 export default App

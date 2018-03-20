@@ -8,12 +8,16 @@ class Counter extends Component {
         count: PropTypes.number
     };
 
+    static contextTypes = {
+        dictionary: PropTypes.object
+    }
+
     render() {
         return (
             <div>
                 <h3>
                     {this.props.count}
-                    <button onClick = {this.handleIncrement}>increment</button>
+                    <button onClick = {this.handleIncrement}>{this.context.dictionary.increment}</button>
                 </h3>
             </div>
         )

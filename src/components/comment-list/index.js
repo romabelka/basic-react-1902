@@ -24,7 +24,8 @@ class CommentList extends Component {
     static contextTypes = {
         store: PropTypes.object,
         router: PropTypes.object,
-        user: PropTypes.string
+        user: PropTypes.string,
+        dictionary: PropTypes.object
     }
 
     componentWillReceiveProps({ isOpen, article, loadArticleComments }) {
@@ -35,8 +36,9 @@ class CommentList extends Component {
 
     render() {
         const {isOpen, toggleOpen} = this.props
-        console.log('---', 'rendering CommentList')
-        const text = isOpen ? 'hide comments' : 'show comments'
+        const {dictionary} = this.context
+
+        const text = isOpen ? dictionary['hide comments'] : dictionary['show comments']
         return (
             <div>
                 <button onClick={toggleOpen} className="test__comment-list--btn">{text}</button>
@@ -53,6 +55,8 @@ class CommentList extends Component {
 
     getBody() {
         const {article: { comments, id, commentsLoading, commentsLoaded }, isOpen} = this.props
+        const {dictionary} = this.context
+
         if (!isOpen) return null
         if (commentsLoading) return <Loader />
         if (!commentsLoaded) return null
@@ -63,7 +67,7 @@ class CommentList extends Component {
                 {
                     comments.length
                         ? this.getComments()
-                        : <h3 className="test__comment-list--empty">No comments yet</h3>
+                        : <h3 className="test__comment-list--empty">{dictionary['No comments yet']}</h3>
                 }
                 <CommentForm articleId = {id} />
             </div>
