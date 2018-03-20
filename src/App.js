@@ -9,35 +9,46 @@ import Counter from './components/counter'
 import 'react-select/dist/react-select.css'
 import CommentsPage from './components/routes/comments-page'
 import Article from './components/article'
+import { EN, RU } from './constants'
+import FormatIntl from './decorators/FormatIntl'
 
 class App extends Component {
     static propTypes = {
     };
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        lang: PropTypes.string
     }
 
     state = {
-        username: ''
+        username: '',
+        lang: EN,
     }
 
     getChildContext() {
         return {
-            user: this.state.username
+            user: this.state.username,
+            lang: this.state.lang
         }
     }
 
+    handleLangButton = lang => {
+      this.setState({ lang })
+    }
+
     render() {
-        console.log('---', 'rendering App')
+        console.log('---context', this.context)
         return (
             <div>
+                <button onClick = {() => this.handleLangButton(RU)}>RU</button>
+                <button onClick = {() => this.handleLangButton(EN)}>EN</button>
                 <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
                 <ul>
-                    <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>counter</NavLink></li>
-                    <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>filters</NavLink></li>
-                    <li><NavLink to = "/articles" activeStyle = {{ color: 'red' }}>articles</NavLink></li>
-                    <li><NavLink to = "/comments/1" activeStyle = {{ color: 'red' }}>comments</NavLink></li>
+                    <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>{this.props.getIntl("counter", this.state.lang)}</NavLink></li>
+                    <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>{this.props.getIntl("filters", this.state.lang)}</NavLink></li>
+                    <li><NavLink to = "/articles" activeStyle = {{ color: 'red' }}>{this.props.getIntl("articles", this.state.lang)}</NavLink></li>
+                    <li><NavLink to = "/comments/1" activeStyle = {{ color: 'red' }}>{this.props.getIntl("comments", this.state.lang)}</NavLink></li>
                 </ul>
                 <Switch>
                     <Redirect from = "/" to = "/articles" exact />
@@ -57,4 +68,4 @@ class App extends Component {
     handleUserChange = username => this.setState({ username })
 }
 
-export default App
+export default FormatIntl(App)

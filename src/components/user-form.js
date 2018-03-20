@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import FormatIntl from '../decorators/FormatIntl'
 
 class UserForm extends Component {
     static propTypes = {
-
+      getIntl: PropTypes.func
     };
 
     render() {
         return (
             <div>
-                username: <input value = {this.props.value} onChange = {this.handleChange}/>
+                {this.props.getIntl("username")}: <input value = {this.props.value} onChange = {this.handleChange}/>
             </div>
         )
     }
@@ -22,4 +24,4 @@ class UserForm extends Component {
     }
 }
 
-export default UserForm
+export default FormatIntl(UserForm)

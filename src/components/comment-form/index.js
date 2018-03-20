@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {addComment} from '../../AC'
+import FormatIntl from '../../decorators/FormatIntl'
 import './style.css'
 
 class CommentForm extends Component {
@@ -15,13 +16,13 @@ class CommentForm extends Component {
     render() {
         return (
             <form onSubmit = {this.handleSubmit}>
-                user: <input value = {this.state.user}
+                {this.props.getIntl("user")}: <input value = {this.state.user}
                              onChange = {this.handleChange('user')}
                              className = {this.getClassName('user')} />
-                comment: <input value = {this.state.text}
+                {this.props.getIntl("comment")}: <input value = {this.state.text}
                                 onChange = {this.handleChange('text')}
                                 className = {this.getClassName('text')} />
-                <input type = "submit" value = "submit" disabled = {!this.isValidForm()}/>
+                <button onClick={this.handleSubmit} disabled = {!this.isValidForm()}>{this.props.getIntl("submit")}</button>
             </form>
         )
     }
@@ -63,4 +64,4 @@ const limits = {
 
 export default connect(null, (dispatch, ownProps) => ({
     addComment: (comment) => dispatch(addComment(comment, ownProps.articleId))
-}))(CommentForm)
+}))(FormatIntl(CommentForm))
