@@ -78,5 +78,9 @@ export const MESSAGES = {
   "notFoundPage": {
     "EN": "Not Found Page",
     "RU": "Страница не найдена"
+  },
+  "noCommentsYet": {
+    "EN": "No comments yet",
+    "RU": "Пока комментариев нет"
   }
 }

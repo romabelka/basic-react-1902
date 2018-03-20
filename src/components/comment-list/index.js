@@ -64,7 +64,7 @@ class CommentList extends Component {
                 {
                     comments.length
                         ? this.getComments()
-                        : <h3 className="test__comment-list--empty">No comments yet</h3>
+                        : <h3 className="test__comment-list--empty">{this.props.getIntl("noCommentsYet")}</h3>
                 }
                 <CommentForm articleId = {id} />
             </div>
