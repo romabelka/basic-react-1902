@@ -2,17 +2,23 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import ArticleList from '../article-list'
 import Article from '../article'
+import PropTypes from 'prop-types'
 
 class ArticlesRoute extends Component {
     static propTypes = {
 
     };
 
+    static contextTypes = {
+        vocab: PropTypes.object,
+        lang: PropTypes.string
+    };
+
     render() {
         console.log('---', 'rendering Articles Page')
         return (
             <div>
-                <h2>Articles page</h2>
+                <h2>{this.context.vocab['Articles page'][this.context.lang]}</h2>
                 <ArticleList />
                 <Route path = {`${this.props.match.path}/:id`} children = {this.getArticle}/>
             </div>
