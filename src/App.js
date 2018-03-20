@@ -8,6 +8,7 @@ import Filters from './components/filters'
 import Counter from './components/counter'
 import 'react-select/dist/react-select.css'
 import CommentsPage from './components/routes/comments-page'
+import Article from './components/article'
 
 class App extends Component {
     static propTypes = {
@@ -43,6 +44,7 @@ class App extends Component {
                     <Route path = "/counter" component = {Counter} exact />
                     <Route path = "/filters" component = {Filters} />
                     <Route path = "/articles/new" render = {() => <h1>New Article Form</h1>} />
+                    <Route path = "/articles/:id" component = {({ match }) => <Article id = {match.params.id} key = {match.params.id} isOpen />} />
                     <Route path = "/articles" component = {ArticlesPage} />
                     <Route path = "/comments" component = {CommentsPage} />
                     <Route path = "/error" render = {() => <h1>Error page</h1>} />
