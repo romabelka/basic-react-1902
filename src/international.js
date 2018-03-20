@@ -69,10 +69,14 @@ export const MESSAGES = {
   },
   "errorPage": {
     "EN": "Error Page",
-    "RU": "Страница не доступна"
+    "RU": "Ошибка"
   },
   "open": {
     "EN": "open",
     "RU": "открыто"
+  },
+  "notFoundPage": {
+    "EN": "Not Found Page",
+    "RU": "Страница не найдена"
   }
 }

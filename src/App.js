@@ -58,8 +58,8 @@ class App extends Component {
                     <Route path = "/articles/:id" component = {({ match }) => <Article id = {match.params.id} key = {match.params.id} isOpen />} />
                     <Route path = "/articles" component = {ArticlesPage} />
                     <Route path = "/comments" component = {CommentsPage} />
-                    <Route path = "/error" render = {() => <h1>Error page</h1>} />
-                    <Route path = "*" render = {() => <h1>Not Found Page</h1>} />
+                    <Route path = "/error" render = {() => <h1>{this.props.getIntl("errorPage", this.state.lang)}</h1>} />
+                    <Route path = "*" render = {() => <h1>{this.props.getIntl("notFoundPage", this.state.lang)}</h1>} />
                 </Switch>
             </div>
         )
