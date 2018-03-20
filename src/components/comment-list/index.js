@@ -24,7 +24,10 @@ class CommentList extends Component {
     static contextTypes = {
         store: PropTypes.object,
         router: PropTypes.object,
-        user: PropTypes.string
+        user: PropTypes.string,
+        vocab: PropTypes.object,
+        lang: PropTypes.string
+
     }
 
     componentWillReceiveProps({ isOpen, article, loadArticleComments }) {
@@ -36,7 +39,7 @@ class CommentList extends Component {
     render() {
         const {isOpen, toggleOpen} = this.props
         console.log('---', 'rendering CommentList')
-        const text = isOpen ? 'hide comments' : 'show comments'
+        const text = isOpen ? this.context.vocab['hide comments'][this.context.lang] : 'show comments'
         return (
             <div>
                 <button onClick={toggleOpen} className="test__comment-list--btn">{text}</button>

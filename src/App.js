@@ -14,16 +14,35 @@ class App extends Component {
     };
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        lang: PropTypes.string,
+        vocab: PropTypes.object
     }
 
     state = {
-        username: ''
+        username: '',
+        language: 'en',
+        vocabulary: {
+          'counter':{
+            'en':'counter',
+            'ru':'счетчик'
+          },
+          'hide comments':{
+            'en':'hide comments',
+            'ru':'скрыть комментарии'
+          },
+          'Articles page':{
+            'en':'Articles page',
+            'ru':'Страница статей'
+          }
+        }
     }
 
     getChildContext() {
         return {
-            user: this.state.username
+            user: this.state.username,
+            lang: this.state.language,
+            vocab: this.state.vocabulary
         }
     }
 
@@ -31,9 +50,14 @@ class App extends Component {
         console.log('---', 'rendering App')
         return (
             <div>
+                Language:
+                <input type="radio" name="language" onChange={this.handleLanguageChange}  value='en' checked={this.state.language === 'en' }/>English
+                <input type="radio" name="language" onChange={this.handleLanguageChange}  value='ru' checked={this.state.language === 'ru' }/>Russian
+
                 <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
+
                 <ul>
-                    <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>counter</NavLink></li>
+                    <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>{this.state.vocabulary['counter'][this.state.language]}</NavLink></li>
                     <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>filters</NavLink></li>
                     <li><NavLink to = "/articles" activeStyle = {{ color: 'red' }}>articles</NavLink></li>
                     <li><NavLink to = "/comments/1" activeStyle = {{ color: 'red' }}>comments</NavLink></li>
@@ -53,6 +77,7 @@ class App extends Component {
     }
 
     handleUserChange = username => this.setState({ username })
+    handleLanguageChange = changeEvent => this.setState({ language: changeEvent.target.value })
 }
 
 export default App
