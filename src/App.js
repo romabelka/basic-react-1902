@@ -14,7 +14,7 @@ class App extends Component {
     };
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.object,
     }
 
     state = {
@@ -23,7 +23,7 @@ class App extends Component {
 
     getChildContext() {
         return {
-            user: this.state.username
+            user: this.state.username,
         }
     }
 

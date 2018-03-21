@@ -23,3 +23,8 @@ export const filtratedArticles = createSelector(articleListSelector, filtersSele
 export const articleSelector = createSelector(articlesMapSelector, idSelector, (articles, id) => articles.get(id))
 
 export const createCommentSelector = () => createSelector(commentsSelector, idSelector, (comments, id) => comments.get(id))
+
+
+const entriesSelector = dictionary => dictionary.translateEntries
+const patternSelector = (_, message) => message//.toLowerCase()
+export const translateSelector = createSelector(entriesSelector, patternSelector, (entries, pattern) => entries[pattern] ? entries[pattern] : pattern)

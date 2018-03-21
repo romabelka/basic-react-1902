@@ -6,6 +6,7 @@ import Comment from '../comment'
 import CommentForm from '../comment-form'
 import Loader from '../loader'
 import toggleOpen from '../../decorators/toggleOpen'
+import { translate } from '../../decorators/translation'
 import {loadArticleComments} from '../../AC'
 import './style.css'
 
@@ -34,9 +35,9 @@ class CommentList extends Component {
     }
 
     render() {
-        const {isOpen, toggleOpen} = this.props
+        const {isOpen, toggleOpen, __ } = this.props
         console.log('---', 'rendering CommentList')
-        const text = isOpen ? 'hide comments' : 'show comments'
+        const text = isOpen ? __('hide comments') : __('show comments')
         return (
             <div>
                 <button onClick={toggleOpen} className="test__comment-list--btn">{text}</button>
@@ -85,4 +86,4 @@ class CommentList extends Component {
 }
 
 
-export default connect(null, { loadArticleComments }, null, { pure: false })(toggleOpen(CommentList))
+export default connect(null, { loadArticleComments }, null, { pure: false })(toggleOpen(translate(CommentList)))
