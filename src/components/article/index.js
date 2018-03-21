@@ -13,6 +13,10 @@ class Article extends Component {
         error: null
     }
 
+    static contextTypes = {
+        dictionary: PropTypes.object
+    }
+
     componentDidCatch(error) {
         console.log('---', error)
         this.setState({ error })
@@ -25,6 +29,7 @@ class Article extends Component {
 
     render() {
         console.log('---', 'rendering Article')
+        const {dictionary: {deleteMe, open, close}} = this.context
         if (this.state.error) return <h2>{this.state.error.message}</h2>
 
         const { isOpen, article, onButtonClick } = this.props
@@ -38,10 +43,10 @@ class Article extends Component {
                         className = "test__article--button"
                         onClick={() => onButtonClick(article.id)}
                     >
-                        {isOpen ? 'close' : 'open'}
+                        {isOpen ? close : open}
                     </button>
                     <button onClick = {this.handleDelete}>
-                        delete me
+                        {deleteMe}
                     </button>
                 </h2>
                 <CSSTransition

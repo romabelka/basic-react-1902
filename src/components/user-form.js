@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
+import PropTypes from "prop-types";
 
 class UserForm extends Component {
     static propTypes = {
 
-    };
+    }
+
+    static contextTypes = {
+        dictionary: PropTypes.object
+    }
 
     render() {
         return (
             <div>
-                username: <input value = {this.props.value} onChange = {this.handleChange}/>
+                {this.context.dictionary.username}: <input value = {this.props.value} onChange = {this.handleChange}/>
             </div>
         )
     }

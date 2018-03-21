@@ -3,7 +3,7 @@ import {
     START, SUCCESS, FAIL
 } from '../constants'
 import { arrToMap } from './utils'
-import { Record } from 'immutable'
+import { Record, fromJS } from 'immutable'
 
 const ArticleRecord = Record({
     id: null,
@@ -41,7 +41,7 @@ export default (articles = new ReducerState(), action) => {
 
         case LOAD_ALL_ARTICLES + SUCCESS:
             return articles
-                .set('entities', arrToMap(response, ArticleRecord))
+                .update('entities', entities => entities.merge(arrToMap(response, ArticleRecord), entities))
                 .set('loading', false)
                 .set('loaded', true)
 
