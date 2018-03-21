@@ -6,24 +6,28 @@ import ArticlesPage from './components/routes/articles'
 import UserForm from './components/user-form'
 import Filters from './components/filters'
 import Counter from './components/counter'
+import HandleLng from './components/handle-lng'
+import {GLOSSARY} from './constants'
 import 'react-select/dist/react-select.css'
 import CommentsPage from './components/routes/comments-page'
 
 class App extends Component {
-    static propTypes = {
-    };
 
+    
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        glossary: PropTypes.object
     }
 
     state = {
-        username: ''
+        username: '',
+        lng: 1
     }
 
     getChildContext() {
         return {
-            user: this.state.username
+            user: this.state.username,
+            glossary: this.compileGlossary()
         }
     }
 
@@ -31,6 +35,7 @@ class App extends Component {
         console.log('---', 'rendering App')
         return (
             <div>
+                <HandleLng val={this.state.lng} onChange = {this.handleLngChange}/>
                 <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
                 <ul>
                     <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>counter</NavLink></li>
@@ -53,6 +58,16 @@ class App extends Component {
     }
 
     handleUserChange = username => this.setState({ username })
+
+    handleLngChange = ev => this.setState({'lng': +ev.target.value})
+
+    compileGlossary = () => {
+        let glossary = {}
+        for (var word in GLOSSARY) {
+            glossary[word] = GLOSSARY[word][this.state.lng]
+        }
+        return glossary
+    }
 }
 
 export default App

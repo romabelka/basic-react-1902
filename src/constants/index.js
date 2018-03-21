@@ -14,3 +14,16 @@ export const LOAD_COMMENTS_FOR_PAGE = 'LOAD_COMMENTS_FOR_PAGE'
 export const START = '_START'
 export const SUCCESS = '_SUCCESS'
 export const FAIL = '_FAIL'
+
+export const GLOSSARY = {
+    'close': ['close', 'закрыть', 'schließen'],
+    'show': ['show', 'отобразить','anzeigen'],
+    'comments': ['comments', 'комментарии', 'die Kommentare'],
+    'articles': ['articles', 'статьи', 'die Artikle'],
+    'counter': ['counter', 'счетчик', 'der Zähler'],
+    'Please select an article': [
+        'Please select an article',
+        'Выберите статью',
+        'Bitte wählen Sie einen Artikel aus'
+    ]
+}
