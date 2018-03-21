@@ -21,9 +21,13 @@ export const GLOSSARY = {
     'comments': ['comments', 'комментарии', 'die Kommentare'],
     'articles': ['articles', 'статьи', 'die Artikle'],
     'counter': ['counter', 'счетчик', 'der Zähler'],
+    'filters': ['filters', 'фильтры', 'die Filter'],
     'Please select an article': [
         'Please select an article',
         'Выберите статью',
         'Bitte wählen Sie einen Artikel aus'
-    ]
+    ],
+    'username': ['username', 'пользователь', 'Nutzername'],
+    'delete': ['delete me', 'удалить сиё', 'lösche mich'],
+    'loading': ['Loading...', 'мы ждём перемен..', 'die Beladung...']
 }

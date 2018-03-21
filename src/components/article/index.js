@@ -12,6 +12,9 @@ class Article extends Component {
     state = {
         error: null
     }
+    static contextTypes = {
+        glossary: PropTypes.object
+    }
 
     componentDidCatch(error) {
         console.log('---', error)
@@ -28,6 +31,7 @@ class Article extends Component {
         if (this.state.error) return <h2>{this.state.error.message}</h2>
 
         const { isOpen, article, onButtonClick } = this.props
+        const { glossary } = this.context
         if (!article) return null
 
         return (
@@ -38,10 +42,10 @@ class Article extends Component {
                         className = "test__article--button"
                         onClick={() => onButtonClick(article.id)}
                     >
-                        {isOpen ? 'close' : 'open'}
+                        {isOpen ? glossary['close'] : glossary['show']}
                     </button>
                     <button onClick = {this.handleDelete}>
-                        delete me
+                        {glossary['delete']}
                     </button>
                 </h2>
                 <CSSTransition
@@ -64,7 +68,7 @@ class Article extends Component {
         if (article.loading) return <Loader/>
 
         return (
-            <section className = "test__article--body">
+            <section key={article.id} className = "test__article--body">
                 {article.text}
                 <CommentList article = {article}/>
             </section>

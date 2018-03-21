@@ -12,7 +12,9 @@ import 'react-select/dist/react-select.css'
 import CommentsPage from './components/routes/comments-page'
 
 class App extends Component {
-
+    componentWillMount() {
+        this.compileGlossary()
+    }
     
     static childContextTypes = {
         user: PropTypes.string,
@@ -21,27 +23,29 @@ class App extends Component {
 
     state = {
         username: '',
+        glossary: {},
         lng: 1
     }
 
     getChildContext() {
         return {
             user: this.state.username,
-            glossary: this.compileGlossary()
+            glossary: this.state.glossary
         }
     }
 
     render() {
         console.log('---', 'rendering App')
+        const {glossary} = this.state
         return (
             <div>
                 <HandleLng val={this.state.lng} onChange = {this.handleLngChange}/>
                 <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
                 <ul>
-                    <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>counter</NavLink></li>
-                    <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>filters</NavLink></li>
-                    <li><NavLink to = "/articles" activeStyle = {{ color: 'red' }}>articles</NavLink></li>
-                    <li><NavLink to = "/comments/1" activeStyle = {{ color: 'red' }}>comments</NavLink></li>
+                    <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>{glossary.counter}</NavLink></li>
+                    <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>{glossary.filters}</NavLink></li>
+                    <li><NavLink to = "/articles" activeStyle = {{ color: 'red' }}>{ glossary.articles}</NavLink></li>
+                    <li><NavLink to = "/comments/1" activeStyle = {{ color: 'red' }}>{glossary.comments}</NavLink></li>
                 </ul>
                 <Switch>
                     <Redirect from = "/" to = "/articles" exact />
@@ -59,14 +63,17 @@ class App extends Component {
 
     handleUserChange = username => this.setState({ username })
 
-    handleLngChange = ev => this.setState({'lng': +ev.target.value})
+    handleLngChange = ev => {
+        this.setState({'lng': +ev.target.value})
+        this.compileGlossary(ev.target.value)
+    }
 
-    compileGlossary = () => {
+    compileGlossary = (locale = this.state.lng) => {
         let glossary = {}
         for (var word in GLOSSARY) {
-            glossary[word] = GLOSSARY[word][this.state.lng]
+            glossary[word] = GLOSSARY[word][locale]
         }
-        return glossary
+        this.setState({ glossary })
     }
 }
 
