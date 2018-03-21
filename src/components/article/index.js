@@ -6,6 +6,7 @@ import CommentList from '../comment-list'
 import Loader from '../loader'
 import { deleteArticle, loadArticleById } from '../../AC'
 import { articleSelector } from '../../selectors'
+import FormatIntl from '../../decorators/FormatIntl'
 import './style.css'
 
 class Article extends Component {
@@ -34,14 +35,8 @@ class Article extends Component {
             <Fragment>
                 <h2>
                     {article.title}
-                    <button
-                        className = "test__article--button"
-                        onClick={() => onButtonClick(article.id)}
-                    >
-                        {isOpen ? 'close' : 'open'}
-                    </button>
                     <button onClick = {this.handleDelete}>
-                        delete me
+                        {this.props.getIntl("deleteMe")}
                     </button>
                 </h2>
                 <CSSTransition
@@ -84,9 +79,8 @@ Article.propTypes = {
         title: PropTypes.string,
         text: PropTypes.string
     }),
-    onButtonClick: PropTypes.func
 }
 
 export default connect((state, props) => ({
     article: articleSelector(state, props)
-}), { deleteArticle, loadArticleById }, null, { pure: false })(Article)
+}), { deleteArticle, loadArticleById }, null, { pure: false })(FormatIntl(Article))

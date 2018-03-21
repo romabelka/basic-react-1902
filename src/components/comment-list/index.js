@@ -7,6 +7,7 @@ import CommentForm from '../comment-form'
 import Loader from '../loader'
 import toggleOpen from '../../decorators/toggleOpen'
 import {loadArticleComments} from '../../AC'
+import FormatIntl from '../../decorators/FormatIntl'
 import './style.css'
 
 class CommentList extends Component {
@@ -36,7 +37,7 @@ class CommentList extends Component {
     render() {
         const {isOpen, toggleOpen} = this.props
         console.log('---', 'rendering CommentList')
-        const text = isOpen ? 'hide comments' : 'show comments'
+        const text = isOpen ? this.props.getIntl("hideComments") : this.props.getIntl("showComments")
         return (
             <div>
                 <button onClick={toggleOpen} className="test__comment-list--btn">{text}</button>
@@ -63,7 +64,7 @@ class CommentList extends Component {
                 {
                     comments.length
                         ? this.getComments()
-                        : <h3 className="test__comment-list--empty">No comments yet</h3>
+                        : <h3 className="test__comment-list--empty">{this.props.getIntl("noCommentsYet")}</h3>
                 }
                 <CommentForm articleId = {id} />
             </div>
@@ -85,4 +86,4 @@ class CommentList extends Component {
 }
 
 
-export default connect(null, { loadArticleComments }, null, { pure: false })(toggleOpen(CommentList))
+export default connect(null, { loadArticleComments }, null, { pure: false })(toggleOpen(FormatIntl(CommentList)))
