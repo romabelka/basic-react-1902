@@ -8,13 +8,15 @@ import Filters from './components/filters'
 import Counter from './components/counter'
 import 'react-select/dist/react-select.css'
 import CommentsPage from './components/routes/comments-page'
+import dictionary from './dictionary';
 
 class App extends Component {
     static propTypes = {
     };
 
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        dictionary: PropTypes.object
     }
 
     state = {
@@ -23,7 +25,8 @@ class App extends Component {
 
     getChildContext() {
         return {
-            user: this.state.username
+            user: this.state.username,
+            dictionary: dictionary
         }
     }
 

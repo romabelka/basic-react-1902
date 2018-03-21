@@ -24,6 +24,7 @@ export class ArticleList extends Component {
 
     render() {
         const { articles, loading } = this.props
+        console.log('LOADING', loading);
         if (loading) return <Loader />
         const articleElements = articles.map(article =>
             <li key = {article.id} className = "test__article-list--item">
