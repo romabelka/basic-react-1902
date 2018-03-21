@@ -49,7 +49,9 @@ export default (articles = new ReducerState(), action) => {
             return articles.setIn(['entities', payload.id, 'loading'], true)
 
         case LOAD_ARTICLE + SUCCESS:
-            return articles.setIn(['entities', payload.id], new ArticleRecord(payload.response))
+            return articles
+              .setIn(['entities', payload.id], new ArticleRecord(payload.response))
+              .setIn(['entities', payload.id, 'loading'], false)
 
         case LOAD_ARTICLE_COMMENTS + START:
             return articles.setIn(['entities', payload.articleId, 'commentsLoading'], true)

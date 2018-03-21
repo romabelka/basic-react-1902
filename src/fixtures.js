@@ -270,3 +270,13 @@ export default [
     }
 
 ]
+
+export const dictionary = {
+  translateEntries: {
+    'close': 'закрыть',
+    'open': 'открыть',
+    'delete me': 'удали меня',
+    'show comments': 'показать',
+    'hide comments': 'скрыть'
+  }
+}

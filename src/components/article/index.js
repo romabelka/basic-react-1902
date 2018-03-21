@@ -5,10 +5,17 @@ import { connect } from 'react-redux'
 import CommentList from '../comment-list'
 import Loader from '../loader'
 import { deleteArticle, loadArticleById } from '../../AC'
-import { articleSelector } from '../../selectors'
+// import { articleSelector, translateSelector } from '../../selectors'
+import { articleSelector} from '../../selectors'
+// import {dictionary} from '../../fixtures'
+import { translate } from '../../decorators/translation'
 import './style.css'
 
 class Article extends Component {
+    static contextTypes = {
+        dictionary: PropTypes.object,
+    }
+
     state = {
         error: null
     }
@@ -20,6 +27,7 @@ class Article extends Component {
 
     componentDidMount() {
         const { loadArticleById, article, id } = this.props
+        console.log('componentDidMount', article)
         if (!article || (!article.text && !article.loading)) loadArticleById(id)
     }
 
@@ -27,7 +35,7 @@ class Article extends Component {
         console.log('---', 'rendering Article')
         if (this.state.error) return <h2>{this.state.error.message}</h2>
 
-        const { isOpen, article, onButtonClick } = this.props
+        const { isOpen, article, onButtonClick, __ } = this.props
         if (!article) return null
 
         return (
@@ -38,10 +46,10 @@ class Article extends Component {
                         className = "test__article--button"
                         onClick={() => onButtonClick(article.id)}
                     >
-                        {isOpen ? 'close' : 'open'}
+                        {isOpen ? __( 'close') : __('open')}
                     </button>
                     <button onClick = {this.handleDelete}>
-                        delete me
+                        {__("delete me")}
                     </button>
                 </h2>
                 <CSSTransition
@@ -89,4 +97,4 @@ Article.propTypes = {
 
 export default connect((state, props) => ({
     article: articleSelector(state, props)
-}), { deleteArticle, loadArticleById }, null, { pure: false })(Article)
+}), { deleteArticle, loadArticleById }, null, { pure: false })(translate(Article))
