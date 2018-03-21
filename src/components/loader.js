@@ -1,9 +1,15 @@
-import React from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 
-function Loader() {
-    return (
-        <h2>Loading...</h2>
-    )
+class Loader extends Component{
+    static contextTypes = {
+        glossary: PropTypes.object
+    }
+    render () {
+        return (
+            <h2>{ this.context.glossary.loading }</h2>
+        )
+    }
 }
 
 Loader.propTypes = {
