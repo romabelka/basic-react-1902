@@ -9,6 +9,7 @@ import Counter from './components/counter'
 import 'react-select/dist/react-select.css'
 import CommentsPage from './components/routes/comments-page'
 import LangProvider from './components/common/lang-provider'
+import Menu, { MenuItem } from './components/menu'
 
 class App extends Component {
     static propTypes = {};
@@ -39,12 +40,12 @@ class App extends Component {
                         <li onClick={this.changeLanguage('en')}>English</li>
                         <li onClick={this.changeLanguage('ru')}>Russian</li>
                     </ul>
-                    <ul>
-                        <li><NavLink to="/counter" activeStyle={{color: 'red'}}>counter</NavLink></li>
-                        <li><NavLink to="/filters" activeStyle={{color: 'red'}}>filters</NavLink></li>
-                        <li><NavLink to="/articles" activeStyle={{color: 'red'}}>articles</NavLink></li>
-                        <li><NavLink to="/comments/1" activeStyle={{color: 'red'}}>comments</NavLink></li>
-                    </ul>
+                    <Menu>
+                        <MenuItem to="/counter">counter</MenuItem>
+                        <MenuItem to="/filters">filters</MenuItem>
+                        <MenuItem to="/articles">articles</MenuItem>
+                        <MenuItem to="/comments">comments</MenuItem>
+                    </Menu>
                     <Switch>
                         <Redirect from="/" to="/articles" exact/>
                         <Route path="/counter" component={Counter} exact/>
