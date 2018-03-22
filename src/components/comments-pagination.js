@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react'
 import {connect} from 'react-redux'
 import {NavLink} from 'react-router-dom'
 import Comment from './comment'
-import Loader from './loader'
+import Loader from './common/loader'
 import {checkAndLoadCommentsForPage} from '../AC'
 
 class CommentsPagination extends Component {

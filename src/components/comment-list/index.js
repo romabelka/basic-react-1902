@@ -4,7 +4,8 @@ import CSSTransition from 'react-addons-css-transition-group'
 import {connect} from 'react-redux'
 import Comment from '../comment'
 import CommentForm from '../comment-form'
-import Loader from '../loader'
+import Loader from '../common/loader'
+import LocalizedText from '../common/localized-text'
 import toggleOpen from '../../decorators/toggleOpen'
 import {loadArticleComments} from '../../AC'
 import './style.css'
@@ -39,7 +40,9 @@ class CommentList extends Component {
         const text = isOpen ? 'hide comments' : 'show comments'
         return (
             <div>
-                <button onClick={toggleOpen} className="test__comment-list--btn">{text}</button>
+                <button onClick={toggleOpen} className="test__comment-list--btn">
+                    <LocalizedText>{text}</LocalizedText>
+                </button>
                 <CSSTransition
                     transitionName="comments"
                     transitionEnterTimeout={500}
@@ -63,7 +66,7 @@ class CommentList extends Component {
                 {
                     comments.length
                         ? this.getComments()
-                        : <h3 className="test__comment-list--empty">No comments yet</h3>
+                        : <h3 className="test__comment-list--empty"><LocalizedText>No comments yet</LocalizedText></h3>
                 }
                 <CommentForm articleId = {id} />
             </div>

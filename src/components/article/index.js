@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 import CommentList from '../comment-list'
-import Loader from '../loader'
+import Loader from '../common/loader'
+import LocalizedText from '../common/localized-text'
 import { deleteArticle, loadArticleById } from '../../AC'
 import { articleSelector } from '../../selectors'
 import './style.css'
@@ -38,10 +39,10 @@ class Article extends Component {
                         className = "test__article--button"
                         onClick={() => onButtonClick(article.id)}
                     >
-                        {isOpen ? 'close' : 'open'}
+                        <LocalizedText>{isOpen ? 'close' : 'open'}</LocalizedText>
                     </button>
                     <button onClick = {this.handleDelete}>
-                        delete me
+                        <LocalizedText>delete me</LocalizedText>
                     </button>
                 </h2>
                 <CSSTransition
